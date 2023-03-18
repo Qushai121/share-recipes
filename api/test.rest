@@ -1,0 +1,53 @@
+# AUTH
+POST http://localhost:3002/register
+Content-Type: application/json
+
+{
+    "username":"s",
+    "email":"s@gmail.com",
+    "password":"123123",
+    "confpassword":"123123"
+}
+
+###
+POST http://localhost:3002/login
+Content-Type: application/json
+
+{
+    "email":"mamang@gmail.com",
+    "password":"123123"
+}
+###
+DELETE http://localhost:3002/logout
+
+###
+GET http://localhost:3002/refresh
+###
+GET http://localhost:3002/user
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTAzNzg1MSwiZXhwIjoxNjc5MDM3ODcxfQ.wq_-1rOZKgGApmfMogQqusXZThfoiqd0hMEe6Iu4nZM
+
+# CHEF
+
+###
+GET http://localhost:3002/chef
+
+###
+GET http://localhost:3002/chef/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTA0NjI2NCwiZXhwIjoxNjc5MDQ2Mjg0fQ._tinFwP65UpqWaYTnULm-BMJMdT6XSqDEUf1EQTPAYw
+
+
+
+
+
+# RECIPES
+###
+GET http://localhost:3002/recipeme
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTA0NjQ0NSwiZXhwIjoxNjc5MDQ2NDY1fQ.oU0m6uVoNAk-fmEAKyiQg6pdeWTo1U5ymDwbADlYWhE
+
+###
+GET http://localhost:3002/recipe
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJpYXQiOjE2NzkwMzUxODgsImV4cCI6MTY3OTAzNTIwOH0.dKjDMBGA0UdISoeEZYmw_rLRbHWfbnr3hWVbV1I44GE
+
+###
+GET http://localhost:3002/tod
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTAzNjU0NCwiZXhwIjoxNjc5MDM2NTY0fQ.IKENoNAEQ1A1shWxRuKtF2ZW-K5DZ1iL9Xg4XHfHf5w

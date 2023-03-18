@@ -1,0 +1,71 @@
+
+
+* {
+    box-sizing: border-box;
+  }
+  /* Auth */
+  .shadow-btn {
+    box-shadow: 10px 10px 0px 0px #e2c637;
+  }
+  .shadow-nav {
+    box-shadow: 0px 10px 0px 0px #e2c637;
+  }
+  .shadow-nav-small{
+      box-shadow: inset 0 0 10px #f8a100;
+    
+  }
+
+  .shadow-bg {
+    box-shadow: 10px 10px 10px 10px #e2c223;
+  }
+  
+  .shadow-tittle {
+    box-shadow: inset 0 0 4px #805b10;
+  }
+  
+  .shadow-avatar {
+    box-shadow: 5px 7px 0px 0px #e2c223;
+  }
+  
+  .sprinkle span {
+    position: relative;
+    animation: animate 15s linear infinite;
+    background-color: #e2c637;
+    animation-duration: calc(120s / var(--i));
+  }
+  
+  /* ini agar selang seling */
+  /* nanti juga berguna untuk layout resep blog */
+  .sprinkle span:nth-child(even) {
+    background-color: #f9dc5c;
+  }
+
+  .scrollbar-hide{
+    scrollbar-width: 0px;
+  }
+  
+  .resepcard:nth-child(2n+1){
+      flex-direction: row-reverse;
+  }
+  /* animasi dari contek yt */
+  /* next belajar bikin sendiri */
+  @keyframes animate {
+    0% {
+      transform: translateY(70vh) scale(0);
+    }
+    10% {
+      transform: translateY(60vh) scale(2);
+    }
+    16% {
+      transform: translateY(65vh) scale(3);
+    }
+    100% {
+      transform: translateY(20vh) scale(0);
+    }
+  }
+  
+
+  .footer-tittle div h2{
+    @apply font-dmserif text-xl
+  }
+  
