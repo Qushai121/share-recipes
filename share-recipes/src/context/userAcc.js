@@ -5,20 +5,12 @@ export const UserAccContext = createContext()
 
 export const UserAccContextProvider = ({children})=>{
 
-    const[userDatas,setUserDatas] = useState({})
+    const[userDatas,setUserDatas] = useState([])
+    const[errors,setErrors] = useState([])
 
     useEffect(()=>{
         getMe()
     },[])
-
-    // const getAccessToken = async() => {
-    //     try {
-    //         const result = await axios.get('http://localhost:3002/refresh')
-    //         getMe(result.data.accessToken)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
 
     const getMe = async(accessToken)=>{
         try {
@@ -27,12 +19,12 @@ export const UserAccContextProvider = ({children})=>{
             })
             setUserDatas(result.data[0])
         } catch (error) {
-            console.log(error)
+            setErrors(error)
         }
     }
 
     return (
-        <UserAccContext.Provider value={{userDatas}} >
+        <UserAccContext.Provider value={{userDatas,errors}} >
             {children}
         </UserAccContext.Provider>
     )

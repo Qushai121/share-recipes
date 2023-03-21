@@ -5,8 +5,8 @@ import { UserAccContext } from "../../context/userAcc";
 
 const Header = () => {
 
-  const {userDatas} = useContext(UserAccContext)
-  // console.log(userDatas === undefined)
+  const {userDatas,errors} = useContext(UserAccContext)
+  // console.log(!userDatas?.username)
   return (
     <>
       <div className="flex py-6 mx-8 justify-between ">
@@ -18,17 +18,18 @@ const Header = () => {
           <p className="text-sm font-light ">What do you like to cook?</p>
         </div>
         <div className="group px-7 relative">
-        {userDatas === undefined || userDatas === null ? 
+        {userDatas?.username? 
         <>
+        <img className="w-10 rounded-full" src="/icons/user-avatar.svg" alt="" />
+          <div className="absolute group-hover:scale-100 duration-200 scale-0 z-20 -left-2 bg-custom-light px-4 rounded-xl py-4 " >
+            <Link to={'/dashboard'} >Dashboard</Link>
+          </div>
+        
+        </>   
+        :<>
         <img className="w-10 " src="/icons/login.svg" alt="" />
         <div className="absolute group-hover:scale-100 duration-200 scale-0 z-20 right-3 bg-custom-light px-4 rounded-xl py-4 " >
             <Link to={'/login'} >Login</Link>
-          </div>
-        </>   
-        :<>
-          <img className="w-10 rounded-full" src="/icons/user-avatar.svg" alt="" />
-          <div className="absolute group-hover:scale-100 duration-200 scale-0 z-20 -left-2 bg-custom-light px-4 rounded-xl py-4 " >
-            <Link to={'/dashboard'} >Dashboard</Link>
           </div>
         </>
         }

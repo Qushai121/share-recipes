@@ -17,12 +17,15 @@ const Categories = () => {
       <div className="mx-auto w-[90vw] ">
         {CategoryMenu.map((value, index) => (
         <div className="flex rounded-lg shadow-lg resepcard justify-between py-6">
-        <div className="w-32 h-32 mx-2" >
-          <img className="object-cover object-center rounded-xl" src='/img/pizza.png' alt="" />
-          <button className="flex justify-center w-full py-4" ><img className="w-5" src='/icons/bookmark-uncheck.svg' alt="" /></button>
+        <div className=" flex flex-col h-full mx-2" >
+          <img className="object-cover object-center h-36 rounded-xl" src='/img/pizza.png' alt="" />
+          <div className="flex justify-evenly" >
+          <button className="py-2 px-2" ><img className="w-7" src='/icons/heart-unchecked.svg' alt="" /></button>
+          <button className="py-2 px-2" ><img className="w-5" src='/icons/bookmark-uncheck.svg' alt="" /></button>
+          </div>
         </div>
         
-          <div className="mx-4 " >
+          <div className="mx-2 " >
             <div className="flex justify-between " >
               <h1 className="text-xl font-medium font-roboto w-[45vw] overflow-x-auto whitespace-nowrap " >Buaaaaaaabur Beku </h1>
               <p className="font-light overflow-x-scroll w-16 h-7 "><span>|</span> 20 min</p>

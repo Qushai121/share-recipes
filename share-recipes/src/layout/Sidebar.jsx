@@ -1,26 +1,28 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import {Menu, Transition} from '@headlessui/react'
 
 const Sidebar = () => {
         const[show,setShow] = useState(false)
     // return(null)
 
+
+
   return (
     <div className='py-2 w-full h-[70vh]' >
-    <button onClick={()=>setShow(!show)} className={` ${show? 'mx-[16px] ' :'flex mx-auto' } `} >
+    <button onClick={()=>setShow(!show)} className={` ${show ? 'mx-[16px] ' :'flex mx-auto' } `} >
 
             <img className='w-10 z-50 bg-slate-200 p-2 rounded-lg' src="/icons/bars.svg" alt="" />
     </button>
 
-    <div className={` ${show ?'-translate-x-28':'translate-x-0'} relative group mt-2 z-10 bg-orange-400 rounded-r-lg duration-300 w-[17vw] h-[93.3vh] hover:w-[45vw]`} >
+    <div className={` ${show ?'translate-x-0':'-translate-x-28 opacity-80 translate-y-5'} relative group mt-2 z-10  bg-orange-400 rounded-r-lg duration-300 w-[17vw] h-[93.3vh] hover:w-[45vw]`} >
         <div className='relative overflow-hidden' >
         <div className='flex flex-col gap-2 mt-3'>
         <p className='font-semibold mx-auto ' >Menu</p>
        
        
        
-       <Link to={'/home'} className='flex relative w-full py-2 z-50   ' >
+       <Link to={'/home'}  className='flex relative w-full py-2 z-50 mt-5 ' >
        <div className='w-9 bg-custom-main ml-4 p-2 rounded-lg '>
        <img className='h-5 mx-auto z-50 ' src="/icons/house.svg" alt="" />
        </div>

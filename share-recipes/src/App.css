@@ -64,7 +64,28 @@
     }
   }
   
+  /* acumalaka */
+  .kaget{
+    padding: 20px ;
+    border-radius: 20px;
+    text-align: center;
+    animation: kaget 6.35s infinite;
+  }
 
+  @keyframes kaget {
+    0%{
+      transform:scale(0);
+    }
+    50%{
+      transform:scale(1)
+    }
+    100%{
+      transform:scale(2)
+    }
+    0%{
+      transform: scale(0);
+    }
+  }
   .footer-tittle div h2{
     @apply font-dmserif text-xl
   }

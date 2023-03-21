@@ -11,13 +11,13 @@ export const Recipe = db.define('recipe',{
         type:DataTypes.STRING
     },
     thumbnail_main:{
-        type:DataTypes.STRING
+        type:DataTypes.TEXT
     },
     thumbnail_second:{
-        type:DataTypes.STRING
+        type:DataTypes.TEXT
     },
     about_food:{
-        type:DataTypes.STRING
+        type:DataTypes.TEXT
     },
     ingredient:{
         type:DataTypes.TEXT

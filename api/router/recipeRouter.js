@@ -1,5 +1,5 @@
 import express from 'express'
-import { getRecipeByMe, getTrendingRecipes } from '../controller/recipeController.js'
+import { addRecipeByMe, getRecipeByMe, getTrendingRecipes } from '../controller/recipeController.js'
 import { refreshTheToken } from '../controller/tokenController.js'
 import { verifyChef } from '../middleware/verifyChef.js'
 import { verifyToken } from '../middleware/verifyToken.js'
@@ -11,5 +11,6 @@ router.get('/recipe', getTrendingRecipes)
 
 // khusus CHEF
 router.get('/recipeme', refreshTheToken, verifyToken, getRecipeByMe)
+router.post('/add/recipeme', refreshTheToken, verifyToken, addRecipeByMe)
 
 export default router

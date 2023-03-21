@@ -10,7 +10,7 @@ export const refreshTheToken = async (req, res, next) => {
         // console.log(accessToken)
         // console.log('apapaaaaa')
         // console.log(refreshToken)
-        if (!refreshTheToken) return res.status(400).json('token g ada')
+        if (!refreshToken) return res.status(400).json('you should login properly ')
         const result = await User.findOne({
             where: {
                 refresh_token: refreshToken

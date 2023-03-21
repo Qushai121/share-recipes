@@ -41,10 +41,11 @@ const CategoryMenu = [
 const Home = () => {
   const { datas, loading, errors } = useFetch("http://localhost:3002/recipe");
   const [chefDatas, setChefDatas] = useState([]);
-  console.log(datas);
+  // console.log(datas);
   useEffect(() => {
     getChef();
   }, []);
+  // console.log(datas)
 
   const getChef = async () => {
     try {
@@ -76,56 +77,72 @@ const Home = () => {
       </div>
       <div className="">
         <div className="flex py-8 px-4 gap-4 overflow-x-scroll pt-4">
-          {datas.map((value, index) => (
-            <div
-              key={index}
-              className="relative bg-walter-white pb-7 w-fit rounded-xl shadow-lg "
-            >
-              <button className="absolute p-1 top-1 right-2 ">
-                <img
-                  className="w-[20px] pt-[2px] "
-                  src="/icons/bookmark-uncheck.svg"
-                  alt=""
-                />
-              </button>
-              <button className="absolute p-1 top-10 right-2 ">
-                <img
-                  className="w-[22px] pt-[2px] "
-                  src="/icons/heart-unchecked.svg"
-                  alt=""
-                />
-              </button>
-              {/* kirimkan value dari datas yang sudah di fetch di useFetch setelah itu kirimkan melalui tag Link  */}
-              <Link to={"trending"} state={value}>
-                <img
-                  className="h-32 w-full rounded-t-xl object-cover object-left-bottom"
-                  src="/img/pizza.png"
-                  alt=""
-                />
-                <div className="mx-4 mt-2 flex justify-between w-[50vw] font-inter font-thin [&>h1]:font-medium [&>h1]:text-lg ">
-                  <div>
-                    <h1 className="font-medium text-lg">{value.tittle}</h1>
-                    <div className=" text-sm gap-4 font-light">
-                      <h1>
-                        Recipe by <span>{value.maker}</span>
-                      </h1>
-                      <p>20 min</p>
+          {datas.map((value, index) => {
+            const bookmark = (kFormatter(value.recipeStatefull?.bookmark));
+            {/* setiap 999 di konfersi ke k */}
+            function kFormatter(num) {
+              return Math.abs(num) > 999
+                ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
+                : Math.sign(num) * Math.abs(num);
+            }
+            const like = (kFormatter(value.recipeStatefull?.like));
+            {/* console.log(like) */}
+
+            return (
+              <div
+                key={index}
+                className="relative bg-walter-white  pb-7 w-fit rounded-xl shadow-lg "
+              >
+                <button className="absolute flex flex-col w-10 p-1 top-1 right-2 ">
+                  <img
+                    className="w-[20px] mx-auto pt-[2px] "
+                    src="/icons/bookmark-uncheck.svg"
+                    alt=""
+                  />
+
+                  <p className="text-[10px] mx-auto overflow-x-scroll">{bookmark || '0'}</p>
+                </button>
+                <button className="absolute flex flex-col w-10 p-1 top-16 right-2 ">
+                  <img
+                    className="w-[24px] mx-auto pt-[1px] "
+                    src="/icons/heart-unchecked.svg"
+                    alt=""
+                  />
+
+                  <p className="text-[10px] mx-auto overflow-x-scroll">{like || '0'}</p>
+                </button>
+                {/* kirimkan value dari datas yang sudah di fetch di useFetch setelah itu kirimkan melalui tag Link  */}
+                <Link to={"blog"} state={value}>
+                  <img
+                    className="h-32 w-full rounded-t-xl object-cover object-left-bottom"
+                    src="/img/pizza.png"
+                    alt=""
+                  />
+                  <div className="mx-4 mt-2 flex justify-between w-[50vw] font-inter font-thin [&>h1]:font-medium [&>h1]:text-lg ">
+                    <div>
+                      <h1 className="font-medium text-lg">{value.tittle}</h1>
+                      <div className=" text-sm gap-4 font-light">
+                        <h1>
+                          Recipe by <span>{value.maker}</span>
+                        </h1>
+                        <p>20 min</p>
+                      </div>
+                    </div>
+                    <div className="bg-custom-main rounded-2xl h-10 w-10 ">
+                      <img
+                        className="w-full h-full shadow-avatar rounded-2xl py-2"
+                        src="/icons/user-avatar.svg"
+                        alt=""
+                      />
                     </div>
                   </div>
-                  <div className="bg-custom-main rounded-2xl h-10 w-10 ">
-                    <img
-                      className="w-full h-full shadow-avatar rounded-2xl py-2"
-                      src="/icons/user-avatar.svg"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </Link>
-            </div>
-          ))}
+                </Link>
+              </div>
+            );
+          })}
           <Link className="text-transparent flex items-center ">
             <img className="w-6 rounded-full " src="/icons/arrow.svg" alt="" />
-            sss
+            ss
           </Link>
         </div>
       </div>

@@ -14,7 +14,7 @@ POST http://localhost:3002/login
 Content-Type: application/json
 
 {
-    "email":"mamang@gmail.com",
+    "email":"s@gmail.com",
     "password":"123123"
 }
 ###
@@ -33,7 +33,7 @@ GET http://localhost:3002/chef
 
 ###
 GET http://localhost:3002/chef/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTA0NjI2NCwiZXhwIjoxNjc5MDQ2Mjg0fQ._tinFwP65UpqWaYTnULm-BMJMdT6XSqDEUf1EQTPAYw
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTA0NjI2NCwiZXhwIjoxNjc5MDQ2Mjg0fQ._tinFwP65UpqWaYTnULm-BMJMdT6XSqDEUf1EQTPAYw
 
 
 
@@ -48,6 +48,21 @@ GET http://localhost:3002/recipeme
 GET http://localhost:3002/recipe
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJpYXQiOjE2NzkwMzUxODgsImV4cCI6MTY3OTAzNTIwOH0.dKjDMBGA0UdISoeEZYmw_rLRbHWfbnr3hWVbV1I44GE
 
+### 
+POST http://localhost:3002/add/recipeme
+Content-Type: application/json
+
+{
+    "tittle":"anu bakar",
+    "thumbnail_main":"bakarmain.jpg",
+    "thumbnail_second":"barkasecond.jpg",
+    "about_food":"anu bakar adalah anu yang dibakar,anu ini berasal dari daerah anu",
+    "ingredient":"anu itu iya gitu masa ",
+    "time":20,
+    "step":"pertama lumuri anu dengan ono lalu masukan anu ke ono sampai meresap lalu bakar anu sampai mengering ",
+    "category":"asian"
+
+}
 ###
 GET http://localhost:3002/tod
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTAzNjU0NCwiZXhwIjoxNjc5MDM2NTY0fQ.IKENoNAEQ1A1shWxRuKtF2ZW-K5DZ1iL9Xg4XHfHf5w
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTAzNjU0NCwiZXhwIjoxNjc5MDM2NTY0fQ.IKENoNAEQ1A1shWxRuKtF2ZW-K5DZ1iL9Xg4XHfHf5w

@@ -13,6 +13,8 @@ import ChefDetail from './pages/ChefDetail';
 import Trending from './pages/Trending';
 import ProtectedLayout from './layout/Protected/ProtectedLayout';
 import MyRecipes from './pages/protected/MyRecipes';
+import DetailRecipes from './pages/DetailRecipes';
+import AddRecipes from './pages/protected/AddRecipes';
 
 
 const router = createBrowserRouter([
@@ -41,6 +43,9 @@ const router = createBrowserRouter([
       {
         path:"chef/:id",
         element:(<ChefDetail/>)
+      },{
+        path:"blog",
+        element:(<DetailRecipes/>)
       }
     ]
   },
@@ -52,8 +57,12 @@ const router = createBrowserRouter([
       {
         path:'myrecipes',
         element:(<MyRecipes/>)
+      },
+      {
+        path:'add',
+        element:(<AddRecipes/>)
       }
-    ]
+      ]
   },
   
   {

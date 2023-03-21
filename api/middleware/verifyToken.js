@@ -7,7 +7,7 @@ export const verifyToken = (req, res, next) => {
     // console.log(token)
     if (token == null) return res.sendStatus(400)
     jwt.verify(token, process.env.ACCESS_TOKEN, (err, decode) => {
-        if (err) return res.json('salah tolol')
+        if (err) return res.json('token expires sir')
         res.locals.userId = decode.userId
         res.locals.usernames = decode.usernames
         res.locals.emails = decode.emails
