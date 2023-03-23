@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Sprinkle from '../shared/Sprinkle'
+import Sprinkle from '../components/Sprinkle'
+
 
 
 const Start = () => {

@@ -4,12 +4,6 @@ import jwt from "jsonwebtoken"
 export const refreshTheToken = async (req, res, next) => {
     try {
         const refreshToken = req.cookies.refreshToken
-        // const accessTokens = req.headers['authorization']
-        // const accessToken = accessTokens?.split(' ')[1]
-        // if(!accestoken) return res.status(400)
-        // console.log(accessToken)
-        // console.log('apapaaaaa')
-        // console.log(refreshToken)
         if (!refreshToken) return res.status(400).json('you should login properly ')
         const result = await User.findOne({
             where: {
@@ -23,11 +17,7 @@ export const refreshTheToken = async (req, res, next) => {
             const userId = decoded.userId
             const usernames = decoded.usernames
             const emails = decoded.emails
-            const roles = decoded.roles
-            console.log(roles)
-            // const name = result[0].username;
-            // const email = result[0].email;
-            const accessToken = jwt.sign({ userId, usernames, emails, roles }, process.env.ACCESS_TOKEN, {
+            const accessToken = jwt.sign({ userId, usernames, emails}, process.env.ACCESS_TOKEN, {
                 expiresIn: '20s'
             });
 

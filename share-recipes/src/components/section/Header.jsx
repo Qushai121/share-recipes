@@ -6,7 +6,7 @@ import { UserAccContext } from "../../context/userAcc";
 const Header = () => {
 
   const {userDatas,errors} = useContext(UserAccContext)
-  // console.log(!userDatas?.username)
+  // console.log(userDatas == null)
   return (
     <>
       <div className="flex py-6 mx-8 justify-between ">
@@ -18,9 +18,10 @@ const Header = () => {
           <p className="text-sm font-light ">What do you like to cook?</p>
         </div>
         <div className="group px-7 relative">
-        {userDatas?.username? 
+        {userDatas? 
         <>
-        <img className="w-10 rounded-full" src="/icons/user-avatar.svg" alt="" />
+        <img className="w-20 h-16 object-cover rounded-full" 
+        src={`http://localhost:3002/${userDatas.avatar}`} alt="" />
           <div className="absolute group-hover:scale-100 duration-200 scale-0 z-20 -left-2 bg-custom-light px-4 rounded-xl py-4 " >
             <Link to={'/dashboard'} >Dashboard</Link>
           </div>

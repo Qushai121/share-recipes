@@ -9,7 +9,7 @@ import { where } from "sequelize";
 
 
 export const register = async (req, res) => {
-    const { username, email, password, confpassword } = req.body
+    const { username, email, password,avatar, confpassword } = req.body
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -39,6 +39,7 @@ export const register = async (req, res) => {
             try {
                 User.create({
                     'username': username,
+                    'avatar':avatar,
                     'email': email,
                     'password': hash
                 })
@@ -70,12 +71,11 @@ export const login = async (req, res) => {
         // username befungsi untuk mengisi field owner di resep secara auto
         const usernames = result[0].username
         const emails = result[0].email
-        const roles = result[0].role
-        console.log(roles)
-        const accessToken = jwt.sign({ userId, usernames, emails,roles }, process.env.ACCESS_TOKEN, {
+        
+        const accessToken = jwt.sign({ userId, usernames, emails }, process.env.ACCESS_TOKEN, {
             expiresIn: '20s'
         })
-        const refreshToken = jwt.sign({ userId, usernames, emails,roles }, process.env.REFRESH_TOKEN, {
+        const refreshToken = jwt.sign({ userId, usernames, emails }, process.env.REFRESH_TOKEN, {
             expiresIn: '7d'
         })
         await User.update({ refresh_token: refreshToken }, {

@@ -6,8 +6,7 @@ import Login from '../../pages/auth/Login'
 
 const ProtectedLayout = () => {
 const {userDatas,errors} = useContext(UserAccContext)
-if(errors.response?.status==400){
-
+if(errors.response?.status==400 || !userDatas){
   // bismillah aman 🗿
   return <div className='relative flex justify-center items-center'>
     <img className='w-72' src="/img/the-rock.gif" alt="" />
@@ -22,7 +21,7 @@ if(errors.response?.status==400){
     <div className='absolute left-0 z-50' >
       <Sidebar/>
     </div>
-      <div className='absolute w-full bg-walter-white h-[100vh]' >
+      <div className='absolute w-full bg-walter-white overflow-y-scroll h-[100vh]' >
       <div className='pt-[4rem] ' >
       <Outlet/>
         {/* <button><img className='w-6' src="/icons/bars.svg" alt="" /></button> */}

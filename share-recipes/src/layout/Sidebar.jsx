@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {Menu, Transition} from '@headlessui/react'
+import axios from 'axios'
 
 const Sidebar = () => {
+  const navigate = useNavigate()
         const[show,setShow] = useState(false)
     // return(null)
 
+    const logout = async () => {
+      try {
+        await axios.delete("http://localhost:3002/logout")
+        navigate('/home')
+        window.location.reload()
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
 
   return (
-    <div className='py-2 w-full h-[70vh]' >
+    <div className='py-2 w-full ' >
     <button onClick={()=>setShow(!show)} className={` ${show ? 'mx-[16px] ' :'flex mx-auto' } `} >
 
             <img className='w-10 z-50 bg-slate-200 p-2 rounded-lg' src="/icons/bars.svg" alt="" />
     </button>
 
-    <div className={` ${show ?'translate-x-0':'-translate-x-28 opacity-80 translate-y-5'} relative group mt-2 z-10  bg-orange-400 rounded-r-lg duration-300 w-[17vw] h-[93.3vh] hover:w-[45vw]`} >
+    <div className={` ${show ?'translate-x-0':'-translate-x-28 opacity-80 translate-y-5'} relative group mt-2 z-10  bg-orange-400 rounded-r-lg duration-300 w-[17vw] h-[90vh] hover:w-[45vw]`} >
         <div className='relative overflow-hidden' >
         <div className='flex flex-col gap-2 mt-3'>
         <p className='font-semibold mx-auto ' >Menu</p>
@@ -78,14 +89,14 @@ const Sidebar = () => {
        </div>
        </Link>
        
-       <Link className='flex relative w-full py-2 z-50   ' >
+       <div onClick={logout} className='flex relative w-full py-2 z-50 ' >
        <div className='w-9 bg-custom-main ml-4 p-2 rounded-lg '>
        <img className='h-5 mx-auto z-50 ' src="/icons/logout.svg" alt="" />
        </div>
        <div className='-z-10 w-96 absolute top-2 -left-6 opacity-0 duration-300 ml-6 group-hover:opacity-100 group-hover:translate-x-16  leading-9 ' >
             Logout
        </div>
-       </Link>
+       </div>
        
        
     

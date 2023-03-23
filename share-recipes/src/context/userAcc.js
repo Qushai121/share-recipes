@@ -5,8 +5,9 @@ export const UserAccContext = createContext()
 
 export const UserAccContextProvider = ({children})=>{
 
-    const[userDatas,setUserDatas] = useState([])
+    const[userDatas,setUserDatas] = useState(null)
     const[errors,setErrors] = useState([])
+
 
     useEffect(()=>{
         getMe()

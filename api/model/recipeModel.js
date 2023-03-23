@@ -4,9 +4,6 @@ import { User } from "./userModel.js";
 
 
 export const Recipe = db.define('recipe',{
-    maker:{
-        type:DataTypes.STRING
-    },
     tittle:{
         type:DataTypes.STRING
     },
@@ -34,15 +31,13 @@ export const Recipe = db.define('recipe',{
    
 
 },{
-    // timestamps:false,
+    
     freezeTableName:true
 })
 
 User.hasMany(Recipe)
+Recipe.belongsTo(User)
 
-// Recipe.hasOne(recipeStatefull);
-// // recipeStatefull.belongsTo(Recipe,{
-// //     foreignKey:'recipeId'
-// // })
+
 
 // db.sync({force:true})

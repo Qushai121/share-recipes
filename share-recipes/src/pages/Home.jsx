@@ -6,6 +6,9 @@ import MenuFilter from "../components/MenuFilter";
 import { UserAccContext } from "../context/userAcc";
 import axios from "axios";
 import useFetch from "../hooks/useFetch";
+import Bookmark from "../components/Bookmark";
+import Like from "../components/Like";
+import Loading from "../components/Loading";
 
 const CategoryMenu = [
   {
@@ -56,6 +59,8 @@ const Home = () => {
     }
   };
 
+  
+
   return (
     <div className=" font-inter">
       <div className="pt-3 pb-5">
@@ -76,46 +81,37 @@ const Home = () => {
         </Link>
       </div>
       <div className="">
-        <div className="flex py-8 px-4 gap-4 overflow-x-scroll pt-4">
-          {datas.map((value, index) => {
-            const bookmark = (kFormatter(value.recipeStatefull?.bookmark));
-            {/* setiap 999 di konfersi ke k */}
-            function kFormatter(num) {
-              return Math.abs(num) > 999
-                ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + "k"
-                : Math.sign(num) * Math.abs(num);
-            }
-            const like = (kFormatter(value.recipeStatefull?.like));
-            {/* console.log(like) */}
 
+      {/* TRENDING */}
+        <div className="flex py-8 px-4 gap-4 overflow-x-scroll pt-4">
+        {loading?<Loading msg="Getting Trending..." /> :<>
+          {datas.map((value, index) => {
+            console.log(value?.User?.avatar ?? 'aaa' )
             return (
               <div
                 key={index}
                 className="relative bg-walter-white  pb-7 w-fit rounded-xl shadow-lg "
               >
                 <button className="absolute flex flex-col w-10 p-1 top-1 right-2 ">
-                  <img
-                    className="w-[20px] mx-auto pt-[2px] "
-                    src="/icons/bookmark-uncheck.svg"
-                    alt=""
-                  />
-
-                  <p className="text-[10px] mx-auto overflow-x-scroll">{bookmark || '0'}</p>
+                {/* reuseable bookmark */}
+                  <Bookmark bookmarks={value.recipeStatefull} 
+                  style={'w-[20px] '} wrapper={' w-full flex flex-col items-center justify-center'} 
+                  fill={''} />
+    
                 </button>
+
                 <button className="absolute flex flex-col w-10 p-1 top-16 right-2 ">
-                  <img
-                    className="w-[24px] mx-auto pt-[1px] "
-                    src="/icons/heart-unchecked.svg"
-                    alt=""
-                  />
-
-                  <p className="text-[10px] mx-auto overflow-x-scroll">{like || '0'}</p>
+                {/* reuseable heart/like */}
+                  <Like likes={value?.recipeStatefull}
+                  wrapper={' w-full flex flex-col items-center justify-center'}
+                  style={'w-[24px] mx-auto pt-[1px] '} fill={''} />
                 </button>
+
                 {/* kirimkan value dari datas yang sudah di fetch di useFetch setelah itu kirimkan melalui tag Link  */}
                 <Link to={"blog"} state={value}>
                   <img
                     className="h-32 w-full rounded-t-xl object-cover object-left-bottom"
-                    src="/img/pizza.png"
+                    src={`http://localhost:3002/${value.thumbnail_main}`}
                     alt=""
                   />
                   <div className="mx-4 mt-2 flex justify-between w-[50vw] font-inter font-thin [&>h1]:font-medium [&>h1]:text-lg ">
@@ -123,23 +119,34 @@ const Home = () => {
                       <h1 className="font-medium text-lg">{value.tittle}</h1>
                       <div className=" text-sm gap-4 font-light">
                         <h1>
-                          Recipe by <span>{value.maker}</span>
+                          Recipe by <span>{value?.User?.username}</span>
                         </h1>
-                        <p>20 min</p>
+                        <p>{value.time}</p>
                       </div>
                     </div>
-                    <div className="bg-custom-main rounded-2xl h-10 w-10 ">
-                      <img
-                        className="w-full h-full shadow-avatar rounded-2xl py-2"
-                        src="/icons/user-avatar.svg"
+                    <div className="bg-custom-main rounded-full h-14 w-16 ">
+                    {value?.User?.avatar ? <img
+                        className="w-16 h-14 object-cover shadow-avatar rounded-full "
+                        
+                        src={`http://localhost:3002/${value?.User?.avatar}`}
                         alt=""
                       />
+                    
+                    :<img
+                        className="w-14 h-14 shadow-avatar rounded-full "
+                        src='http://localhost:3002/default-avatar.png'
+                        alt=""
+                      />
+                    
+                    }
+                      
                     </div>
                   </div>
                 </Link>
               </div>
             );
           })}
+          </>}
           <Link className="text-transparent flex items-center ">
             <img className="w-6 rounded-full " src="/icons/arrow.svg" alt="" />
             ss
@@ -196,6 +203,7 @@ const Home = () => {
         </Link>
       </div>
 
+{/* POPULAR CHEF */}
       <div className="flex pb-10 pt-5 overflow-x-scroll">
         {chefDatas.map((value, index) => (
           <Link
@@ -207,11 +215,11 @@ const Home = () => {
           >
             <div className="bg-custom-main flex justify-center flex-col py-4 rounded-xl items-center ">
               <img
-                className=" rounded-full w-11 shadow-xl"
-                src={`${value.avatar || "/icons/user-avatar.svg"}`}
+                className=" rounded-full w-12 h-12 object-cover shadow-xl"
+                src={`http://localhost:3002/${value.avatar || "default-avatar.png"}`}
                 alt=""
               />
-              <p className="w-24 text-center">{value.username}</p>
+              <p className="w-24 text-center overflow-x-scroll ">{value.username}</p>
             </div>
           </Link>
         ))}

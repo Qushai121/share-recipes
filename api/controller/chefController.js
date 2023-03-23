@@ -5,7 +5,7 @@ export const getChefAll = async (req, res) => {
     try {
         const result = await User.findAll({
             include: [{ model: Recipe }],
-            attributes:['id','username','avatar','email'],
+            attributes: ['id', 'username', 'avatar', 'email'],
             // where:{
             //     role:"client"
             // }
@@ -16,3 +16,16 @@ export const getChefAll = async (req, res) => {
     }
 }
 
+export const getChefById = async (req, res) => {
+    try {
+        const res = await User.findAll({
+            include: [{ model: Recipe }],
+            where: {
+                id: req.params.id
+            }
+        })
+        res.json(res)
+    } catch (error) {
+        console.log(error)
+    }
+}

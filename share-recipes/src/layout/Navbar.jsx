@@ -5,7 +5,6 @@ import { NavLink, Outlet } from 'react-router-dom'
 const Navbar = () => {
   const [container,setContainer] = useState(false)
 
-  console.log(container)
  
   return (
     <div className='font-roboto w-full z-50 flex justify-center text-center fixed h-[1px] translate-y-[85vh]' >
