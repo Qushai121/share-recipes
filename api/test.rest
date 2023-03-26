@@ -4,9 +4,9 @@ POST http://localhost:3002/register
 Content-Type: application/json
 
 {
-    "username":"Qushai",
-    "avatart":"lagi-avatar.jpeg",
-    "email":"qushai9@gmail.com",
+    "username":"Qushais",
+    "avatar":"avatar.jpeg",
+    "email":"qushais@gmail.com",
     "password":"123123",
     "confpassword":"123123"
 }
@@ -16,7 +16,7 @@ POST http://localhost:3002/login
 Content-Type: application/json
 
 {
-    "email":"qushai9@gmail.com",
+    "email":"qushais@gmail.com",
     "password":"123123"
 }
 ###
@@ -43,11 +43,13 @@ GET http://localhost:3002/chef/1
 
 # RECIPES
 ###
+GET http://localhost:3002/likeme
+###
 GET http://localhost:3002/recipeme
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTA0NjQ0NSwiZXhwIjoxNjc5MDQ2NDY1fQ.oU0m6uVoNAk-fmEAKyiQg6pdeWTo1U5ymDwbADlYWhE
 
 ###
-DELETE http://localhost:3002/delete/recipeme/5
+DELETE http://localhost:3002/delete/recipeme/2
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJpYXQiOjE2NzkwMzUxODgsImV4cCI6MTY3OTAzNTIwOH0.dKjDMBGA0UdISoeEZYmw_rLRbHWfbnr3hWVbV1I44GE
 
 ### 

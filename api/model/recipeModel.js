@@ -31,13 +31,11 @@ export const Recipe = db.define('recipe',{
    
 
 },{
-    
-    freezeTableName:true
+    freezeTableName:true,
+    timestamps:false
 })
 
 User.hasMany(Recipe)
 Recipe.belongsTo(User)
 
 
-
-// db.sync({force:true})

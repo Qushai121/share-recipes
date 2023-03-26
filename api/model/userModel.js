@@ -22,7 +22,8 @@ export const User = db.define('User',{
         defaultValue:"client"
     }
 },{
-    freezeTableName:true
+    freezeTableName:true,
+    timestamps:false
 })
 
 // User.sync()

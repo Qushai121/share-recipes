@@ -42,7 +42,7 @@ const CategoryMenu = [
 ];
 
 const Home = () => {
-  const { datas, loading, errors } = useFetch("http://localhost:3002/recipe");
+  const { datas, loading, errors,refetch } = useFetch("http://localhost:3002/recipe");
   const [chefDatas, setChefDatas] = useState([]);
   // console.log(datas);
   useEffect(() => {
@@ -81,12 +81,11 @@ const Home = () => {
         </Link>
       </div>
       <div className="">
-
+{/* <button onClick={refetch} >Refetch</button> */}
       {/* TRENDING */}
         <div className="flex py-8 px-4 gap-4 overflow-x-scroll pt-4">
         {loading?<Loading msg="Getting Trending..." /> :<>
           {datas.map((value, index) => {
-            console.log(value?.User?.avatar ?? 'aaa' )
             return (
               <div
                 key={index}
@@ -102,7 +101,7 @@ const Home = () => {
 
                 <button className="absolute flex flex-col w-10 p-1 top-16 right-2 ">
                 {/* reuseable heart/like */}
-                  <Like likes={value?.recipeStatefull}
+                  <Like recipeId={value?.recipeStatefull}
                   wrapper={' w-full flex flex-col items-center justify-center'}
                   style={'w-[24px] mx-auto pt-[1px] '} fill={''} />
                 </button>
@@ -124,16 +123,16 @@ const Home = () => {
                         <p>{value.time}</p>
                       </div>
                     </div>
-                    <div className="bg-custom-main rounded-full h-14 w-16 ">
+                    <div className="bg-custom-main rounded-full h-10 w-14 ">
                     {value?.User?.avatar ? <img
-                        className="w-16 h-14 object-cover shadow-avatar rounded-full "
+                        className="w-16 h-14 object-cover object-center shadow-avatar rounded-full "
                         
                         src={`http://localhost:3002/${value?.User?.avatar}`}
                         alt=""
                       />
                     
                     :<img
-                        className="w-14 h-14 shadow-avatar rounded-full "
+                        className="w-12 h-12 shadow-avatar rounded-full "
                         src='http://localhost:3002/default-avatar.png'
                         alt=""
                       />

@@ -6,7 +6,7 @@ import Login from '../../pages/auth/Login'
 
 const ProtectedLayout = () => {
 const {userDatas,errors} = useContext(UserAccContext)
-if(errors.response?.status==400 || !userDatas){
+if(errors.response?.status==400){
   // bismillah aman 🗿
   return <div className='relative flex justify-center items-center'>
     <img className='w-72' src="/img/the-rock.gif" alt="" />

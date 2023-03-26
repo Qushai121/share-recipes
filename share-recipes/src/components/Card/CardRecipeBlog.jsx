@@ -16,7 +16,7 @@ const CardRecipeBlog = ({value}) => {
               />
               <div className="flex justify-evenly mt-2 ">
                 <div>
-                  <Like likes={value?.recipeStatefull}
+                  <Like recipeId={value?.recipeStatefull}
                   style={'w-[26px] mx-auto '} wrapper={'flex flex-col'}
                   fill={''} />
                 </div>

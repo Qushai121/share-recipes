@@ -4,6 +4,9 @@ import { User } from "../model/userModel.js";
 import jwt from "jsonwebtoken";
 import { Recipe } from "../model/recipeModel.js";
 import { where } from "sequelize";
+import { myBookmarkList } from "../model/bookmarkModel.js";
+import { myLikeList } from "../model/likeModel.js";
+
 
 
 
@@ -15,8 +18,6 @@ export const register = async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
     }
-
-
 
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(password, salt)
@@ -37,13 +38,23 @@ export const register = async (req, res) => {
         if (resultname) return res.status(400).json({ username: 'username already in use' })
         if (!resultname) {
             try {
-                User.create({
+              const result = await User.create({
                     'username': username,
                     'avatar':avatar,
                     'email': email,
                     'password': hash
                 })
-                res.status(200).json('Signup Process Success')
+                // ketika buat registrasi buat juga table baru untuk myBookmark
+                // dengan memberi foreignkey ke mybookmark id user yang regis
+                // res.json(result.id)
+                    await myBookmarkList.create({
+                        UserId:result.id
+                    })
+
+                    await myLikeList.create({
+                        UserId:result.id
+                    })
+               res.json('signup succesfulll')
             } catch (error) {
                 console.log(error)
             }
@@ -66,9 +77,9 @@ export const login = async (req, res) => {
         if (result.length <= 0) return res.status(400).json({ email: 'Email not registered please signUp  ' })
         const isMatch = bcrypt.compareSync(password, result[0].password)
         if (!isMatch) return res.status(400).json({ password: 'wrong password' })
+        
         // payload
         const userId = result[0].id
-        // username befungsi untuk mengisi field owner di resep secara auto
         const usernames = result[0].username
         const emails = result[0].email
         
@@ -119,7 +130,7 @@ export const logout = async (req, res) => {
 
 export const getMe = async(req,res) => {
     // res.json(res.locals.userId)
-    console.log('ssss')
+    // console.log('ssss')
     try {
         const result = await User.findAll({
             where:{

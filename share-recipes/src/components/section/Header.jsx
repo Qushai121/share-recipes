@@ -20,8 +20,8 @@ const Header = () => {
         <div className="group px-7 relative">
         {userDatas? 
         <>
-        <img className="w-20 h-16 object-cover rounded-full" 
-        src={`http://localhost:3002/${userDatas.avatar}`} alt="" />
+        <img className="w-16 h-16 object-cover rounded-full" 
+        src={`http://localhost:3002/${userDatas.avatar || 'default-avatar.png'}`} alt="" />
           <div className="absolute group-hover:scale-100 duration-200 scale-0 z-20 -left-2 bg-custom-light px-4 rounded-xl py-4 " >
             <Link to={'/dashboard'} >Dashboard</Link>
           </div>

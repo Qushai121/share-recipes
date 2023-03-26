@@ -4,12 +4,9 @@ import recipeRouter from "./router/recipeRouter.js"
 import chefRouter from "./router/chefRouter.js"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser";
-import { Recipe } from "./model/recipeModel.js";
 import cors from "cors"
-import { recipeStatefull } from "./model/recipeStatefuModel.js";
 import { db } from "./config/db.js";
 import multer from "multer";
-import path from "path"
 
 
 const app = express()
@@ -20,6 +17,7 @@ app.use(express.json())
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }))
 
 
+// db.sync()
 
 // upload image start
 // https://www.npmjs.com/package/multer
