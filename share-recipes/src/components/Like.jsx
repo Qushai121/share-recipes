@@ -14,16 +14,16 @@ const Like = ({coba,recipeId, style,pStyle, wrapper, fill }) => {
   const getLikeByMe = async() => {
 
     try {
-      const result = await axios.get(`http://localhost:3002/likeme/${recipeId.id}`);
+      const result = await axios.get(`/likeme/${recipeId.id}`);
      setLikeByMe(result.data[0])
     } catch (error) {
-      console.log('ga')
+      console.log()
     }
     
     
     
   };
-console.log(likeByme?.myLike)
+// console.log(likeByme?.myLike)
   // (likeByme.map((value)=>console.log(value === recipeId.id ) ) )
   // console.log(likeByme !== 0)
   // let k ='' ;
@@ -35,9 +35,9 @@ console.log(likeByme?.myLike)
 
   const getLike = async () => {
     try {
-      const result = await axios.post(`http://localhost:3002/getlike/${recipeId.id}`)
+      const result = await axios.post(`/getlike/${recipeId.id}`)
       setLikess(result.data[0])
-      console.log(result)
+      // console.log(result)
       getLikeByMe()
     } catch (error) {
       
@@ -67,31 +67,32 @@ console.log(likeByme?.myLike)
   
   const giveLike = async () => {
     try {
-      const hasil = await axios.post(`http://localhost:3002/like/${recipeId.id}`)
+      const hasil = await axios.post(`/like/${recipeId.id}`)
       console.log(hasil)
       getLike()
     } catch (error) {
       console.log(error)
     }
   };
-// console.log(likeByme)
-  // console.log()
+  // console.log(likess?.recipeId)
+  // console.log(likeByme?.myLike)
   return (
     <>
-
     {likeByme?.myLike == likess.recipeId ? (
       <div className={wrapper}>
           <div className={style}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            
               <path
-                fill={fill}
+                fill={fill || '#B81B47' }
                 d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 
         27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5
         -129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"
               />
+              
             </svg>
           </div>
-          <p className="text-[10px] flex justify-center overflow-x-scroll">
+          <p className="text-[10px] font-bold flex justify-center overflow-x-scroll">
             {like || "0"}
           </p>
         </div>

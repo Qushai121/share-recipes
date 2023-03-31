@@ -13,9 +13,9 @@ export const UserAccContextProvider = ({children})=>{
         getMe()
     },[])
 
-    const getMe = async(accessToken)=>{
+    const getMe = async()=>{
         try {
-            const result = await axios.get("http://localhost:3002/user",{
+            const result = await axios.get("/user",{
                
             })
             setUserDatas(result.data[0])

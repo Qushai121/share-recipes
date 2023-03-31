@@ -20,7 +20,7 @@ export const Recipe = db.define('recipe',{
         type:DataTypes.TEXT
     },
     time:{
-        type:DataTypes.INTEGER
+        type:DataTypes.STRING,
     },
     step:{
         type:DataTypes.TEXT

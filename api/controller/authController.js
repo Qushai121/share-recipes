@@ -38,22 +38,13 @@ export const register = async (req, res) => {
         if (resultname) return res.status(400).json({ username: 'username already in use' })
         if (!resultname) {
             try {
-              const result = await User.create({
+              await User.create({
                     'username': username,
                     'avatar':avatar,
                     'email': email,
                     'password': hash
                 })
-                // ketika buat registrasi buat juga table baru untuk myBookmark
-                // dengan memberi foreignkey ke mybookmark id user yang regis
-                // res.json(result.id)
-                    await myBookmarkList.create({
-                        UserId:result.id
-                    })
-
-                    await myLikeList.create({
-                        UserId:result.id
-                    })
+               
                res.json('signup succesfulll')
             } catch (error) {
                 console.log(error)

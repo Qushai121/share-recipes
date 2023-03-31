@@ -1,13 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { CategoryMenu } from './data/Category';
 
-const MenuFilter = ({Category}) => {
+
+const MenuFilter = () => {
   
   return (
     <>
         
       <div className="flex pb-10 px-4 pt-3 overflow-x-scroll">
-        {Category.map((value, index) => (
+        {CategoryMenu.map((value, index) => (
           <Link
             to={value.link}
             key={index}

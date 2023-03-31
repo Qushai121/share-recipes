@@ -41,7 +41,12 @@
   }
 
   .scrollbar-hide{
+    -ms-overflow-style: none; 
     scrollbar-width: 0px;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
   
   .resepcard:nth-child(2n+1){
@@ -89,4 +94,6 @@
   .footer-tittle div h2{
     @apply font-dmserif text-xl
   }
+  
+
   

@@ -41,6 +41,16 @@ const Sidebar = () => {
             Home
        </div>
        </Link>
+
+       <Link to={''}
+        className='flex relative w-full py-2 z-50   ' >
+       <div className='w-9 bg-custom-main ml-4 p-2 rounded-lg '>
+       <img className='h-5 mx-auto z-50 ' src="/icons/readme.svg" alt="" />
+       </div>
+       <div className='-z-10 w-96 absolute top-2 -left-6 opacity-0 duration-300 ml-6 group-hover:opacity-100 group-hover:translate-x-16  leading-9 ' >
+       instructions
+       </div>
+       </Link>
        
        <Link className='flex relative w-full py-2 z-50   ' >
        <div className='w-9 bg-custom-main ml-4 p-2 rounded-lg '>

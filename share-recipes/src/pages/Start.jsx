@@ -17,7 +17,7 @@ const Start = () => {
         <h1 className='text-xl  opacity-80 ' ><Link to={'/home'} className="py-10 font-dmserif" >Start Cooking </Link> </h1>
       </div>
       <div className='flex justify-center mt-4 font-roboto translate-y-[84vh] bg-clip-text text-transparent bg-gradient-to-t from-custom-third  ' >&#169; copyright by uhuy.ltd</div>
-      <div className='flex justify-center lg:translate-x-[20vw]' >
+      <div className='flex justify-center ' >
      <Sprinkle/>
       </div>
     </div>

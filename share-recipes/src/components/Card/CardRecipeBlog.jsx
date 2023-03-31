@@ -4,7 +4,6 @@ import Bookmark from '../Bookmark'
 import Like from '../Like'
 
 const CardRecipeBlog = ({value}) => {
-    console.log(value?.recipeStatefull?.bookmark)
   return (
     <>
         <div className="flex rounded-lg shadow-2xl resepcard justify-between py-6">
@@ -37,7 +36,8 @@ const CardRecipeBlog = ({value}) => {
                 {value.about_food}
               </h1>
               <div className="bg-custom-main flex justify-center shadow-btn w-fit mt-2 py-2 px-4 rounded-lg">
-                <Link to={"detail/"}>See Body</Link>
+                <Link state={value}
+                to={"/detail"}>See More</Link>
               </div>
             </div>
           </div>

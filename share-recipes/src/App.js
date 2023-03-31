@@ -49,6 +49,11 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path:'detail',
+    element:(<DetailRecipes/>)
+
+  },
  
   {
     path:'dashboard',

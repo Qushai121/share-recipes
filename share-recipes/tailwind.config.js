@@ -12,6 +12,7 @@ module.exports = {
         'custom-light': '#ffe566',
         'custom-second': '#BB8A0D',
         'custom-third': '#F6B100',
+        'custom-pink': '#F6907B',
         // bukan sembarang putih ini mah 
         'ghost-white': '#FCFCFC',
         'walter-white': '#EDEDED',

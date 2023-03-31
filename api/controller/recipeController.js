@@ -1,8 +1,10 @@
-import { Op } from "sequelize"
+import fs from 'fs'
+import { Op, where } from 'sequelize'
 import { myLikeList } from "../model/likeModel.js"
 import { Recipe } from "../model/recipeModel.js"
 import { recipeStatefull } from "../model/recipeStatefuModel.js"
 import { User } from "../model/userModel.js"
+
 
 export const getTrendingRecipes = async (req, res) => {
     try {
@@ -17,8 +19,8 @@ export const getTrendingRecipes = async (req, res) => {
                 //  ['createdAt','DESC'],
                 [recipeStatefull, "like", "DESC"]
             ],
-            // muncul kan hanya 5 like terbesar 
-            limit: 5,
+            // muncul kan hanya 6 like terbesar 
+            limit: 6,
         })
 
         res.json(result)
@@ -26,6 +28,60 @@ export const getTrendingRecipes = async (req, res) => {
         console.log(error)
     }
 }
+
+export const getAllRecipes = async (req,res) =>{
+    if(req.query.cate == undefined ){
+        try {
+        const result = await Recipe.findAll({
+            include:[
+                {model:User},
+                { model: recipeStatefull }
+            ],
+        })
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+    }
+
+    }else{
+        try {
+        const result = await Recipe.findAll({
+            include:[
+                {model:User},
+                { model: recipeStatefull }
+            ],
+            where:{
+                category:req.query.cate
+            }
+        })
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+    }
+    }
+        
+    
+}
+
+
+// export const getRecipesByTittle = async (req,res) => {
+//     try {
+//         const result = await Recipe.findAll({
+//             include:[
+//                 {model:User},
+//                 { model: recipeStatefull }
+//             ]
+//         })
+
+//         where:{
+//             tittle:{[Op.like]: `%${req.params}%`}
+//         }
+//     } catch (error) {
+//         console.log(error)
+//     }
+
+// }
+
 
 export const getLikeById = async (req, res) => {
     // console.log(req.params.id)
@@ -46,17 +102,17 @@ export const getlikeByMe = async (req, res) => {
     try {
         const result = await myLikeList.findAll({
             where: {
-                myLike:req.params.id,
+                myLike: req.params.id,
                 UserId: res.locals.userId
             }
         })
 
-    //     let john = []
-    //    for(let i = 0;i < result.length;i++){
-    //   john.push(result[i]?.myLike)
-    // }
+        //     let john = []
+        //    for(let i = 0;i < result.length;i++){
+        //   john.push(result[i]?.myLike)
+        // }
 
-    // console.log(john)
+        // console.log(john)
         res.json(result)
     } catch (error) {
         console.log(error)
@@ -64,44 +120,6 @@ export const getlikeByMe = async (req, res) => {
 }
 
 
-// export const updateLike = async (req, res) => {
-//     try {
-
-//         const result = await recipeStatefull.findAll({
-//             where: {
-//                 id: req.params.id
-//             }
-//         })
-//         console.log(result[0].recipeId)
-//         const recipeIds = await myLikeList.findAll({
-//             where: {
-//                 myLike: result[0].recipeId
-//             }
-//         })
-//         console.log(recipeIds[0].myLike >= 0)
-//         if (recipeIds[0].myLike >= 0) return res.status(400).json(recipeIds[0].myLike)
-
-//             const hasil = await myLikeList.create({
-//                 myLike: result[0].recipeId,
-
-//             },{
-//                 where:{
-//                     UserId:res.locals.userId
-//                 }
-//             })
-
-//             await recipeStatefull.increment('like', {
-//             by: 1,
-//             where: {
-//                 id: req.params.id
-//             }
-//         })
-//         res.json('gagaga')
-
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
 export const updateLike = async (req, res) => {
     try {
 
@@ -131,7 +149,10 @@ export const getRecipeByMe = async (req, res) => {
     // res.json(res.locals.usernames)
     try {
         const result = await Recipe.findAll({
-            include: [{ model: recipeStatefull }],
+            include: [
+                { model: recipeStatefull },
+                { model: User, attributes: ['avatar', 'username'] }
+            ],
             where: {
                 UserId: res.locals.userId
             }
@@ -143,8 +164,6 @@ export const getRecipeByMe = async (req, res) => {
 }
 
 export const addRecipeByMe = async (req, res) => {
-    // console.log(req.body)
-    // console.log(res.locals.avatars)
     const { tittle, thumbnail_main, thumbnail_second, about_food, ingredient, time, step, category } = req.body
     try {
         const result = await Recipe.create({
@@ -168,15 +187,61 @@ export const addRecipeByMe = async (req, res) => {
 
 
 export const deleteRecipeByMe = async (req, res) => {
-    // console.log(req.params.id)
+
     try {
+        try {
+            const img = await Recipe.findAll({
+                where: {
+                    id: req.params.id,
+                    UserId: res.locals.userId
+                }
+            })
+
+            
+            console.log(img[0].thumbnail_main)
+            console.log(img[0].thumbnail_second)
+            
+            const path = "public/uploads/"
+            fs.unlinkSync(path + img[0].thumbnail_main, (err) => {
+                if (err) {
+                    res.status(500).send({
+                        message: "Could not delete the file. " + err,
+                    });
+                }
+
+                res.status(200).send({
+                    message: "File is deleted.",
+                });
+            })
+
+            fs.unlinkSync(path + img[0].thumbnail_second, (err) => {
+                if (err) {
+                    res.status(500).send({
+                        message: "Could not delete the file. " + err,
+                    });
+                }
+
+                res.status(200).send({
+                    message: "File is deleted.",
+                });
+            })
+        } catch (error) {
+
+        }
+        await recipeStatefull.destroy({
+            where:{
+                recipeId:req.params.id
+            }
+        })
+
+
         const result = await Recipe.destroy({
             where: {
                 id: req.params.id,
                 UserId: res.locals.userId
             }
         })
-        if (result >= 0) return res.status(404).json("you not allowed to do that")
+        if (result[0] >= 0) return res.status(404).json("you not allowed to do that")
         res.json('recipe Succefully deleted')
     } catch (error) {
         console.log(error)

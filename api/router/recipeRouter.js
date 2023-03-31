@@ -1,5 +1,5 @@
 import express from 'express'
-import { addRecipeByMe, deleteRecipeByMe, getLikeById, getlikeByMe, getRecipeByMe, getTrendingRecipes, updateLike } from '../controller/recipeController.js'
+import { addRecipeByMe, deleteRecipeByMe, getAllRecipes, getLikeById, getlikeByMe, getRecipeByMe, getTrendingRecipes, updateLike } from '../controller/recipeController.js'
 import { refreshTheToken } from '../controller/tokenController.js'
 import { verifyLike } from '../middleware/verifyLike.js'
 import { verifyToken } from '../middleware/verifyToken.js'
@@ -10,7 +10,8 @@ const router = express.Router()
 // rules Chef adalah orang yang sudah login 
 
 // All User
-router.get('/recipe', getTrendingRecipes)
+router.get('/recipe',getAllRecipes )
+router.get('/trending', getTrendingRecipes)
 // All User
 
 
