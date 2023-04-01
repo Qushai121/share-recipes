@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
     "username":"Qushais",
-    "avatar":"avatar.jpeg",
+    "avatar":"avatar-rill.jpg",
     "email":"qushais@gmail.com",
     "password":"123123",
     "confpassword":"123123"
@@ -43,7 +43,7 @@ GET http://localhost:3002/chef/1
 
 # RECIPES
 ###
-GET http://localhost:3002/likeme
+GET http://localhost:3002/search/?tittle=semur
 ###
 GET http://localhost:3002/recipeme
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lcyI6Im1hbWFuZyIsImVtYWlscyI6Im1hbWFuZ0BnbWFpbC5jb20iLCJyb2xlcyI6ImNsaWVudCIsImlhdCI6MTY3OTA0NjQ0NSwiZXhwIjoxNjc5MDQ2NDY1fQ.oU0m6uVoNAk-fmEAKyiQg6pdeWTo1U5ymDwbADlYWhE
@@ -57,14 +57,20 @@ POST http://localhost:3002/add/recipeme
 Content-Type: application/json
 
 {
-    "tittle":"anu bakar",
-    "thumbnail_main":"akujugamau.jpeg",
+    "tittle":"uaajajar",
+    "thumbnail_main":"akujugamau.jpg",
     "thumbnail_second":"barkasecond.jpg",
-    "about_food":"anu bakar adalah anu yang dibakar,anu ini berasal dari daerah anu",
-    "ingredient":"anu itu iya gitu masa ",
+    "about_food":"sdsdsd",
+    "ingredient":" dari apiapaiapai",
     "time":20,
-    "step":"pertama lumuri anu dengan ono lalu masukan anu ke ono sampai meresap lalu bakar anu sampai mengering ",
-    "category":"western"
+    "step":"pertamaasdasd
+    asdsa
+    asd
+    adas
+    dasd
+    asdasd
+    sa ",
+    "category":"desert"
 
 }
 ###

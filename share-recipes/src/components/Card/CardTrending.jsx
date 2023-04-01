@@ -12,21 +12,18 @@ const CardTrending = () => {
   const { datas, loading, errors, refetch } = useFetch("/trending");
 
   return (
-    <div className="my-2">
+    <div className="my-2 ">
       {loading ? (
         <Loading wrapper={'my-5 ml-7'} msg="Getting Trending..." />
       ) : (
         <Swiper
-          // install Swiper modules
-          spaceBetween={50}
+          spaceBetween={150}
           slidesPerView={2}
-        //   onSlideChange={() => console.log("slide change")}
-        //   onSwiper={(swiper) => console.log(swiper)}
         >
           {datas.map((value, index) => {
             return (
-              <SwiperSlide key={index} className="mx-8 ">
-                <div className="relative bg-walter-white h-[30vh] pb-7 w-[60vw] rounded-xl shadow-lg ">
+              <SwiperSlide key={index} >
+                <div className="relative mx-4 bg-walter-white h-[30vh] pb-7 w-[60vw] rounded-xl shadow-lg ">
                   <button className="absolute flex flex-col w-10 p-1 top-1 right-2 ">
                     {/* reuseable bookmark */}
                     <Bookmark

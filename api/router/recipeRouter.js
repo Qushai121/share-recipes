@@ -1,5 +1,5 @@
 import express from 'express'
-import { addRecipeByMe, deleteRecipeByMe, getAllRecipes, getLikeById, getlikeByMe, getRecipeByMe, getTrendingRecipes, updateLike } from '../controller/recipeController.js'
+import { addRecipeByMe, deleteRecipeByMe, getAllRecipes, getLikeById, getlikeByMe, getRecipeByMe, getRecipesByTittle, getTrendingRecipes, updateLike } from '../controller/recipeController.js'
 import { refreshTheToken } from '../controller/tokenController.js'
 import { verifyLike } from '../middleware/verifyLike.js'
 import { verifyToken } from '../middleware/verifyToken.js'
@@ -12,6 +12,7 @@ const router = express.Router()
 // All User
 router.get('/recipe',getAllRecipes )
 router.get('/trending', getTrendingRecipes)
+router.get('/search',getRecipesByTittle)
 // All User
 
 

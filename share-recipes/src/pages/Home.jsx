@@ -6,19 +6,21 @@ import MenuFilter from "../components/MenuFilter";
 import axios from "axios";
 import CardTrending from "../components/Card/CardTrending";
 import { CategoryMenu } from "../components/data/Category";
-
+import useFetch from "../hooks/useFetch";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Loading from "../components/Loading";
 
 const Home = () => {
-  
   const [chefDatas, setChefDatas] = useState([]);
-  // console.log(datas);
+  const { datas, loading } = useFetch("/recipe");
   useEffect(() => {
     getChef();
   }, []);
-  // console.log(datas)
+
   const getChef = async () => {
     try {
-      // pake proxy biar mudah 
+      // pake proxy biar mudah
       const result = await axios.get("/chef");
       setChefDatas(result.data);
     } catch (error) {
@@ -45,7 +47,7 @@ const Home = () => {
           <img className="w-5 " src="/icons/arrow.svg" alt="" />
         </Link>
       </div>
-        <CardTrending/>
+      <CardTrending />
       <div className="flex mx-8 justify-between">
         <h1 className="font-medium text-lg text-custom-dark ">Categories</h1>
         <Link
@@ -57,30 +59,37 @@ const Home = () => {
         </Link>
       </div>
       <MenuFilter />
-
       <div className="flex pb-10 pt-3 overflow-x-scroll">
-        {CategoryMenu.map((value, index) => (
-          <Link
-            to={value.link}
-            key={index}
-            className="flex flex-col px-3 w-fit"
-          >
-            <div className=" relative py-20">
-              <div className="bg-custom-main shadow-btn rounded-xl pt-16 flex flex-col items-center">
-                <img
-                  className="w-32 h-32 absolute shadow-xl object-cover object-center top-0 rounded-full border-8 border-custom-dark"
-                  src="/img/pizza.png"
-                  alt=""
-                />
-                <div className=" text-center w-44 pb-6">
-                  <p className="whitespace-pre-line">Wagyu Rendang </p>
-                  <p>by</p>
-                  <p>Jacob Jones</p>
+      {loading?<Loading wrapper={'my-5 ml-7'} msg={'Getting category...'} /> :
+        <Swiper spaceBetween={10} slidesPerView={2}>
+          {datas.slice(0, 5).map((value, index) => (
+            <SwiperSlide key={index}>
+              <Link
+                to={"/detail"}
+                state={value}
+                className="flex flex-col px-3 w-fit"
+              >
+                <div className=" relative py-20">
+                  <div className="bg-custom-main shadow-btn rounded-xl pt-16 flex flex-col items-center">
+                    <img
+                      className="w-32 h-32 absolute shadow-xl object-cover object-center top-0 rounded-full border-8 border-custom-dark"
+                      src={`http://localhost:3002/${
+                        value.thumbnail_main || "default-avatar.png"
+                      }`}
+                      alt=""
+                    />
+                    <div className=" text-center h-32 overflow-y-scroll scrollbar-hide w-44 pb-6">
+                      <p className="whitespace-pre-line">{value.tittle}</p>
+                      <p>by</p>
+                      <p>{value.User.username}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </Link>
-        ))}
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      }
       </div>
 
       <div className="flex justify-between mx-8 pt-4">
@@ -98,9 +107,7 @@ const Home = () => {
       <div className="flex pb-10 pt-5 overflow-x-scroll">
         {chefDatas.map((value, index) => (
           <Link
-            to={`chef/${value.id}`}
-            // kita bisa kirim state chefDatas ke next link seperti dibawah ini
-            state={value}
+            to={`/chef/${value.id}`}
             key={index}
             className="flex flex-col px-3 w-fit"
           >

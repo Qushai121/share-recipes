@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { Op, where } from 'sequelize'
+import { Op, Sequelize, where } from 'sequelize'
 import { myLikeList } from "../model/likeModel.js"
 import { Recipe } from "../model/recipeModel.js"
 import { recipeStatefull } from "../model/recipeStatefuModel.js"
@@ -29,58 +29,63 @@ export const getTrendingRecipes = async (req, res) => {
     }
 }
 
-export const getAllRecipes = async (req,res) =>{
-    if(req.query.cate == undefined ){
+export const getAllRecipes = async (req, res) => {
+    if (req.query.cate == undefined) {
         try {
-        const result = await Recipe.findAll({
-            include:[
-                {model:User},
-                { model: recipeStatefull }
-            ],
-        })
-        res.json(result)
-    } catch (error) {
-        console.log(error)
+            const result = await Recipe.findAll({
+                include: [
+                    { model: User,attributes:['username','avatar','id'] },
+                    { model: recipeStatefull }
+                ],
+            })
+            res.json(result)
+        } catch (error) {
+            console.log(error)
+        }
+
+    } else {
+        try {
+            const result = await Recipe.findAll({
+                include: [
+                    { model: User,attributes:['username','avatar','id'] },
+                    { model: recipeStatefull }
+                ],
+                where: {
+                    category: req.query.cate
+                }
+            })
+            res.json(result)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    }else{
-        try {
-        const result = await Recipe.findAll({
-            include:[
-                {model:User},
-                { model: recipeStatefull }
-            ],
-            where:{
-                category:req.query.cate
-            }
-        })
-        res.json(result)
-    } catch (error) {
-        console.log(error)
-    }
-    }
-        
-    
+
 }
 
 
-// export const getRecipesByTittle = async (req,res) => {
-//     try {
-//         const result = await Recipe.findAll({
-//             include:[
-//                 {model:User},
-//                 { model: recipeStatefull }
-//             ]
-//         })
+export const getRecipesByTittle = async (req, res) => {
+    console.log(req.query.tittle)
+    try {
+        const result = await Recipe.findAll({
+            
+            where: {
+                tittle: {
+                    [Op.like]: `%${req.query.tittle}%`
+                }
+            },
+            include: [
+                { model: User,attributes:['username','avatar','id'] },
+                { model: recipeStatefull }
+            ]
+        })
 
-//         where:{
-//             tittle:{[Op.like]: `%${req.params}%`}
-//         }
-//     } catch (error) {
-//         console.log(error)
-//     }
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+    }
 
-// }
+}
 
 
 export const getLikeById = async (req, res) => {
@@ -155,7 +160,10 @@ export const getRecipeByMe = async (req, res) => {
             ],
             where: {
                 UserId: res.locals.userId
-            }
+            },
+            order: [
+                [ "id", "DESC"]
+            ],
         })
         res.json({ result })
     } catch (error) {
@@ -197,10 +205,10 @@ export const deleteRecipeByMe = async (req, res) => {
                 }
             })
 
-            
+
             console.log(img[0].thumbnail_main)
             console.log(img[0].thumbnail_second)
-            
+
             const path = "public/uploads/"
             fs.unlinkSync(path + img[0].thumbnail_main, (err) => {
                 if (err) {
@@ -229,8 +237,8 @@ export const deleteRecipeByMe = async (req, res) => {
 
         }
         await recipeStatefull.destroy({
-            where:{
-                recipeId:req.params.id
+            where: {
+                recipeId: req.params.id
             }
         })
 

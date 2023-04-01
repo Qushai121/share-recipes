@@ -10,7 +10,6 @@ import SignUp from './pages/auth/SignUp';
 import Start from './pages/Start';
 import Categories from './pages/Categories';
 import ChefDetail from './pages/ChefDetail';
-import Trending from './pages/Trending';
 import ProtectedLayout from './layout/Protected/ProtectedLayout';
 import MyRecipes from './pages/protected/MyRecipes';
 import DetailRecipes from './pages/DetailRecipes';
@@ -24,35 +23,29 @@ const router = createBrowserRouter([
   },
   
   {
-    path:'home',
+    path:'',
     element:(<UserLayout/>),
     children:[
       {
-        path:"",
+        path:"home",
         element:(<Home/>)
        
       },
       {
-        path:"categories",
+        path:"home/categories",
         element:(<Categories/>)
       },
       {
-        path:"trending",
-        element:(<Trending/>)
-      },
-      {
-        path:"chef/:id",
+        path:"home/chef/:id",
         element:(<ChefDetail/>)
       },{
-        path:"blog",
+        path:"detail",
         element:(<DetailRecipes/>)
+      },{
+        path:'chef/:id',
+        element:(<ChefDetail/>)
       }
     ]
-  },
-  {
-    path:'detail',
-    element:(<DetailRecipes/>)
-
   },
  
   {
