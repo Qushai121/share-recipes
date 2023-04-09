@@ -4,6 +4,7 @@ import { myLikeList } from "../model/likeModel.js"
 import { Recipe } from "../model/recipeModel.js"
 import { recipeStatefull } from "../model/recipeStatefuModel.js"
 import { User } from "../model/userModel.js"
+import { myBookmarkList } from '../model/bookmarkModel.js'
 
 
 export const getTrendingRecipes = async (req, res) => {
@@ -29,12 +30,15 @@ export const getTrendingRecipes = async (req, res) => {
     }
 }
 
+
+
 export const getAllRecipes = async (req, res) => {
+    
     if (req.query.cate == undefined) {
         try {
             const result = await Recipe.findAll({
                 include: [
-                    { model: User,attributes:['username','avatar','id'] },
+                    { model: User, attributes: ['username', 'avatar', 'id'] },
                     { model: recipeStatefull }
                 ],
             })
@@ -47,7 +51,7 @@ export const getAllRecipes = async (req, res) => {
         try {
             const result = await Recipe.findAll({
                 include: [
-                    { model: User,attributes:['username','avatar','id'] },
+                    { model: User, attributes: ['username', 'avatar', 'id'] },
                     { model: recipeStatefull }
                 ],
                 where: {
@@ -61,21 +65,22 @@ export const getAllRecipes = async (req, res) => {
     }
 
 
+
+
 }
 
 
 export const getRecipesByTittle = async (req, res) => {
-    console.log(req.query.tittle)
     try {
         const result = await Recipe.findAll({
-            
+
             where: {
                 tittle: {
                     [Op.like]: `%${req.query.tittle}%`
                 }
             },
             include: [
-                { model: User,attributes:['username','avatar','id'] },
+                { model: User, attributes: ['username', 'avatar', 'id'] },
                 { model: recipeStatefull }
             ]
         })
@@ -87,9 +92,7 @@ export const getRecipesByTittle = async (req, res) => {
 
 }
 
-
 export const getLikeById = async (req, res) => {
-    // console.log(req.params.id)
     try {
         const result = await recipeStatefull.findAll({
             where: {
@@ -103,7 +106,6 @@ export const getLikeById = async (req, res) => {
 }
 
 export const getlikeByMe = async (req, res) => {
-    console.log(req.params.id)
     try {
         const result = await myLikeList.findAll({
             where: {
@@ -111,13 +113,6 @@ export const getlikeByMe = async (req, res) => {
                 UserId: res.locals.userId
             }
         })
-
-        //     let john = []
-        //    for(let i = 0;i < result.length;i++){
-        //   john.push(result[i]?.myLike)
-        // }
-
-        // console.log(john)
         res.json(result)
     } catch (error) {
         console.log(error)
@@ -145,13 +140,102 @@ export const updateLike = async (req, res) => {
     }
 }
 
+export const getBookmarkAllByMe = async (req, res) => {
+    // console.log(res.locals.userId)
+    try {
+        const result = await myBookmarkList.findAll({
+            where: {
+                UserId: res.locals.userId,
+
+            },
+            attributes: ['myBookmark']
+        })
+        let element = []
+        for (let i = 0; i < result.length; i++) {
+          element.push(result[i].myBookmark);
+        }
+        try {
+            const result = await Recipe.findAll({
+                include: [
+                    { model: User, attributes: ['username', 'avatar', 'id'] },
+                    { model: recipeStatefull }
+                ],
+                where: {
+                    id: element
+                },
+                
+            })
+            res.json(result)
+        } catch (error) {
+            console.log(error)
+        }
+    } catch (error) {
+        res.status(403).json(error)
+    }
+
+
+    
+        
+    
+
+
+}
+
+export const getBookmarkById = async (req, res) => {
+    try {
+        const result = await recipeStatefull.findAll({
+
+            where: {
+                recipeId: req.params.id
+            }
+
+        })
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getBookmarkByMe = async (req, res) => {
+    try {
+        const result = await myBookmarkList.findAll({
+            where: {
+                myBookmark: req.params.id,
+                UserId: res.locals.userId
+            }
+        })
+        res.json(result)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export const updateBookmark = async (req, res) => {
+    try {
+
+        await myBookmarkList.create({
+            myBookmark: req.params.id,
+            UserId: res.locals.userId
+        })
+
+        await recipeStatefull.increment('bookmark', {
+            by: 1,
+            where: {
+                id: req.params.id
+            }
+        })
+        res.json('bookmark')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 // CHEF itu adalah user yang sudah login
 // jadi dia bisa create-update-delete sesuai recipes yang dia punya/buat
 // PRIVATE FOR CHEF ONLY
 
 export const getRecipeByMe = async (req, res) => {
-    // res.json('tokaosodkkasjdb')
-    // res.json(res.locals.usernames)
     try {
         const result = await Recipe.findAll({
             include: [
@@ -162,7 +246,7 @@ export const getRecipeByMe = async (req, res) => {
                 UserId: res.locals.userId
             },
             order: [
-                [ "id", "DESC"]
+                ["id", "DESC"]
             ],
         })
         res.json({ result })
@@ -204,11 +288,6 @@ export const deleteRecipeByMe = async (req, res) => {
                     UserId: res.locals.userId
                 }
             })
-
-
-            console.log(img[0].thumbnail_main)
-            console.log(img[0].thumbnail_second)
-
             const path = "public/uploads/"
             fs.unlinkSync(path + img[0].thumbnail_main, (err) => {
                 if (err) {

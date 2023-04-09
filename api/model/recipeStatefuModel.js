@@ -25,5 +25,3 @@ export const recipeStatefull = db.define('recipeStatefull',{
 })
 
 Recipe.hasOne(recipeStatefull)
-
-// recipeStatefull.sync({force:true})

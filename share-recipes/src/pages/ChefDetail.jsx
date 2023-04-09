@@ -9,7 +9,7 @@ const ChefDetail = () => {
   // console.log(id);
 
   const { datas, loading } = useFetch(`/chef/${id}`);
-  console.log(datas[1]?.totalLike);
+ 
   return (
     <>
       <header>

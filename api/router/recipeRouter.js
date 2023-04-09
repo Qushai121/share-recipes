@@ -1,8 +1,9 @@
 import express from 'express'
-import { addRecipeByMe, deleteRecipeByMe, getAllRecipes, getLikeById, getlikeByMe, getRecipeByMe, getRecipesByTittle, getTrendingRecipes, updateLike } from '../controller/recipeController.js'
+import { addRecipeByMe, deleteRecipeByMe, getAllRecipes, getBookmarkAllByMe, getBookmarkById, getBookmarkByMe, getLikeById, getlikeByMe, getRecipeByMe, getRecipesByTittle, getTrendingRecipes, updateBookmark, updateLike } from '../controller/recipeController.js'
 import { refreshTheToken } from '../controller/tokenController.js'
 import { verifyLike } from '../middleware/verifyLike.js'
 import { verifyToken } from '../middleware/verifyToken.js'
+import { verifyBookmark } from '../middleware/verifyBookmark.js'
 
 const router = express.Router()
 
@@ -30,8 +31,10 @@ router.get('/likeme/:id',refreshTheToken,verifyToken,getlikeByMe)
 // Fitur Like
 
 // fitur Bookmark
-
-
+router.get('/getallbookmark',refreshTheToken,verifyToken,getBookmarkAllByMe)
+router.post('/getbookmark/:id',getBookmarkById)
+router.post('/bookmark/:id',refreshTheToken,verifyToken,verifyBookmark,updateBookmark)
+router.get('/bookmarkme/:id',refreshTheToken,verifyToken,getBookmarkByMe)
 // fitur Bookmark
 
 

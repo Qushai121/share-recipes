@@ -23,9 +23,7 @@ export const refreshTheToken = async (req, res, next) => {
 
             // nyoba langsung bikin accessToken baru di backend tanpa axios intercepter
             res.locals.accessToken = accessToken
-            // console.log(accessToken)
 
-            // res.json({accessToken})
             next()
         })
     } catch (error) {

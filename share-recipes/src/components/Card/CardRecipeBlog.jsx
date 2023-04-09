@@ -19,7 +19,7 @@ const CardRecipeBlog = ({value}) => {
                   style={'w-[26px] mx-auto '} wrapper={'flex flex-col'}
                   fill={''} />
                 </div>
-                 <Bookmark bookmarks={value?.recipeStatefull} style={'w-[20px] mx-auto '} fill={''} />
+                 <Bookmark recipeId={value?.recipeStatefull} style={'w-[20px] mx-auto '} fill={''} />
               </div>
             </div>
 

@@ -3,33 +3,11 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Bookmark from "../../components/Bookmark";
 import Like from "../../components/Like";
+import { CategoryMenu } from "../../components/data/Category";
 
 // bikin sendiri bingung sendiri 🏴‍☠️
 const AddRecipes = () => {
-  const CategoryMenu = [
-    {
-      value: "Breakfast",
-    },
-    {
-      value: "Dessert",
-    },
-    {
-      value: "Fast Food",
-    },
-    {
-      value: "Vegan",
-    },
-    {
-      value: "AsianFood",
-    },
-    {
-      value: "WesternFood",
-    },
-    {
-      value: "Seafood",
-    },
-  ];
-
+  
   const [menu, setMenu] = useState("Ingredient");
 
   const stylea =
@@ -58,7 +36,7 @@ const AddRecipes = () => {
     ingredient: "",
     time: "00:00",
     step: "",
-    category: "",
+    category: "Breakfast",
   });
 
   
@@ -175,7 +153,6 @@ const AddRecipes = () => {
           <div className="flex gap-5">
             <span>Category</span>
             <select onChange={handleInput} required name="category">
-              <option disabled>Category</option>
               {CategoryMenu.map((value, index) => {
                 return <option value={value.value}>{value.value}</option>;
               })}

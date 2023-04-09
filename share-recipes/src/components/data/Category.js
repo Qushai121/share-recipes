@@ -15,7 +15,7 @@ export const CategoryMenu = [
   },
   {
     link: "/home/categories/?cate=fastfood",
-    value: "Fast Food",
+    value: "FastFood",
   },
   {
     link: "/home/categories/?cate=vegan",
@@ -26,12 +26,16 @@ export const CategoryMenu = [
     value: "AsianFood",
   },
   {
-    link: "/home/categories/?cate=asia",
+    link: "/home/categories/?cate=westernFood",
     value: "WesternFood",
   },
   {
     link: "/home/categories/?cate=seafood",
     value: "Seafood",
+  },
+  {
+    link: "/home/categories/?cate=thai",
+    value: "ThaiFood",
   },
 ];
 

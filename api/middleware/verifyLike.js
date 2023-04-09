@@ -14,8 +14,6 @@ export const verifyLike = async(req,res,next) => {
             UserId:res.locals.userId
         }
     })
-    console.log(check >= 0)
-    // console.log(check >= 0)
     if(check >= 0){
         next()
     }else{

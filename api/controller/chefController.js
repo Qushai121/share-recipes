@@ -1,14 +1,21 @@
 import { Recipe } from "../model/recipeModel.js"
 import { recipeStatefull } from "../model/recipeStatefuModel.js"
 import { User } from "../model/userModel.js"
+import { response } from "../utils/response.js"
 
 export const getChefAll = async (req, res) => {
     try {
         const result = await User.findAll({
-            include: [{ model: Recipe }],
+            include: [{ model: Recipe,include:[
+                {model:recipeStatefull,order: [
+                    [ "like", "DESC"]
+                ],},
+                
+            ] }],
             attributes: ['id', 'username', 'avatar', 'email'],
+            
         })
-        res.json(result)
+        response(200,result,"getting your request",res)
     } catch (error) {
         console.log(error)
     }

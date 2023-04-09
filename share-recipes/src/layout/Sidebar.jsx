@@ -21,12 +21,12 @@ const Sidebar = () => {
 
   return (
     <div className='py-2 w-full ' >
-    <button onClick={()=>setShow(!show)} className={` ${show ? 'mx-[16px] ' :'flex mx-auto' } `} >
+    <button onClick={()=>setShow(!show)} className='px-4' >
 
             <img className='w-10 z-50 bg-slate-200 p-2 rounded-lg' src="/icons/bars.svg" alt="" />
     </button>
 
-    <div className={` ${show ?'translate-x-0':'-translate-x-28 opacity-80 translate-y-5'} relative group mt-2 z-10  bg-orange-400 rounded-r-lg duration-300 w-[17vw] h-[90vh] hover:w-[45vw]`} >
+    <div className={` ${show ?'translate-x-0 lg:-translate-x-96':'-translate-x-28 lg:translate-x-0 opacity-80 translate-y-5'} relative group mt-2 z-10  bg-orange-400 rounded-r-lg duration-300 w-[17vw] h-[90vh] hover:w-[45vw]`} >
         <div className='relative overflow-hidden' >
         <div className='flex flex-col gap-2 mt-3'>
         <p className='font-semibold mx-auto ' >Menu</p>
@@ -90,7 +90,7 @@ const Sidebar = () => {
        </div>
        </Link>
        
-       <Link className='flex relative w-full py-2 z-50   ' >
+       <Link to="bookmark" className='flex relative w-full py-2 z-50   ' >
        <div className='w-9 bg-custom-main ml-4 p-2 rounded-lg '>
        <img className='h-5 mx-auto z-50 ' src="/icons/bookmark-check.svg" alt="" />
        </div>

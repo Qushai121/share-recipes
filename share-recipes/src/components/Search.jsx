@@ -23,7 +23,8 @@ const Search = () => {
       <div className="relative w-fit shadow-2xl">
         <input
           onChange={searchTittle}
-          className="py-3 w-[35vh] rounded-lg "
+          className="py-3 w-[35vh] lg:w-[50vw] lg:h-[6vh]
+           rounded-lg "
           type="text"
           placeholder=" Search for recipes...."
         />
@@ -31,7 +32,7 @@ const Search = () => {
           className="absolute bottom-[1px] right-1 pb-3 px-2 text-transparent"
         >
           ssss
-          <img className="w-5" src="/icons/search.svg" alt="" />
+          <img className="w-5 lg:w-7 " src="/icons/search.svg" alt="" />
         </Link>
       </div>
       {!container ? <></> :

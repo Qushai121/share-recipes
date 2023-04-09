@@ -8,27 +8,29 @@ const DetailRecipes = () => {
   const [menu, setMenu] = useState("Ingredient");
   const state = useLocation().state;
   const stylea =
-    "text-walter-white text-xl duration-300 font-semibold bg-custom-butbrown py-2 px-10 rounded-lg";
+    "text-walter-white text-xl duration-300 font-semibold bg-custom-butbrown py-2 px-10 md:px-16 rounded-lg";
   const styleb =
     "text-xl font-semibold text-custom-butbrown duration-300 py-2 px-10 rounded-lg";
 
   return (
-    <div className="flex flex-col  font-inter ">
+    <div className="flex flex-col font-inter  ">
       <div
-        className="w-full relative  z-auto h-[40vh] bg-cover bg-center"
+        className="h-[40vh] xl:h-[50vh] 
+        w-full relative  bg-cover bg-center"
         style={{
           backgroundImage: `url(http://localhost:3002/${state.thumbnail_main})`,
         }}
       >
         <div className="flex justify-between mx-4 py-3">
-          <p>-- Go back</p>
+          <Link to={'/home'}>-- Go back</Link>
           <Bookmark
-            bookmarks={state?.recipeStatefull}
+            recipeId={state?.recipeStatefull}
             style={"w-6 mx-auto "}
             fill={"white"}
           />
         </div>
-        <div className="w-full h-56 flex justify-center items-end ">
+        <div className=" h-56 md:h-60 xl:h-80 2xl:h-[23rem]
+        w-full flex justify-center items-end ">
           {state?.time}
         </div>
       </div>
@@ -44,13 +46,18 @@ const DetailRecipes = () => {
             }
           />
         </div>
-        <div className="mx-6 rounded-t-xl bg-walter-white h-[80vh]">
-          <div className="mx-4 py-6">
+        <div className="mx-6 xl:mx-20 
+        rounded-t-xl bg-walter-white h-[100vh]">
+          <div className="mx-4 
+          xl:mx-40 py-6">
             <div>
-              <h1 className="text-xl font-semibold ">{state?.tittle}</h1>
-              <h1 className="text-sm font-light ">{state?.about_food}</h1>
+              <h1 className="md:text-2xl
+              text-xl font-semibold ">{state?.tittle}</h1>
+              <h1 className="text-sm md:text-base
+              font-light 
+              ">{state?.about_food}</h1>
             </div>
-            <div className="my-2 gap-4 flex">
+            <div className="my-4 gap-4 flex">
               {state?.User?.avatar ? (
                 <img
                   className="w-14 h-14 object-cover rounded-full "
@@ -66,12 +73,12 @@ const DetailRecipes = () => {
               )}
               <div className="flex flex-col" >
                 <span className="">{state?.User?.username}</span>
-                <Link to={`/chef/${state.UserId}`} className="bg-custom-main px-4 w-fit flex justify-center rounded-xl font-light" >Chef Detail</Link>
+                <Link to={`/chef/${state.UserId}`} className="bg-custom-main px-4 w-fit flex justify-center rounded-md font-light" >Chef Detail</Link>
               </div>
             </div>
-            <hr className="bg-custom-dark h-[2px] " />
+            <hr className="bg-custom-dark h-[2px] my-2" />
             <div className=" scrollbar-hide overflow-scroll">
-              <div className="flex my-2 justify-evenly ">
+              <div className="flex mt-3 mb-5 justify-evenly ">
                 <button
                   onClick={() => setMenu("Ingredient")}
                   className={menu === "Ingredient" ? stylea : styleb}
@@ -87,11 +94,13 @@ const DetailRecipes = () => {
               </div>
 
               {menu === "Direction" ? (
-                <div className="whitespace-pre h-[50vh] scrollbar-hide overflow-scroll ">
+                <div className="md:mx-10 md:text-lg font-normal
+                whitespace-pre h-[50vh] leading-7 scrollbar-hide overflow-scroll ">
                   {state?.step}
                 </div>
               ) : (
-                <div className="whitespace-pre h-[50vh] scrollbar-hide overflow-scroll ">
+                <div className="md:mx-10 md:text-lg font-normal
+                whitespace-pre h-[50vh] leading-7 scrollbar-hide overflow-scroll ">
                   {state?.ingredient}
                 </div>
               )}

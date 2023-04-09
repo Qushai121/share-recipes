@@ -58,7 +58,6 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body
-    console.log(email)
     try {
         const result = await User.findAll({
             where: {
@@ -120,8 +119,6 @@ export const logout = async (req, res) => {
 }
 
 export const getMe = async(req,res) => {
-    // res.json(res.locals.userId)
-    // console.log('ssss')
     try {
         const result = await User.findAll({
             where:{
