@@ -43,7 +43,6 @@ const Like = ({ recipeId, style, pStyle, wrapper, fill }) => {
       await axios.post(`/like/${recipeId.id}`);
       getLike();
     } catch (error) {
-      console.log(error);
     }
   };
   return (

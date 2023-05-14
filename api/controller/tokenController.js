@@ -27,7 +27,7 @@ export const refreshTheToken = async (req, res, next) => {
             next()
         })
     } catch (error) {
-        console.log(error)
+        throw(error)
     }
 
 }

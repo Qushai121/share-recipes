@@ -47,11 +47,11 @@ export const register = async (req, res) => {
                
                res.json('signup succesfulll')
             } catch (error) {
-                console.log(error)
+                throw(error)
             }
         }
     } catch (error) {
-        console.log(error)
+        throw(error)
     }
 
 }
@@ -91,7 +91,7 @@ export const login = async (req, res) => {
         })
         res.json({ accessToken })
     } catch (error) {
-        console.log(error)
+        throw(error)
     }
 }
 
@@ -114,7 +114,7 @@ export const logout = async (req, res) => {
         res.clearCookie('refreshToken')
         return res.sendStatus(200)
     } catch (error) {
-        console.log(error)
+        throw(error)
     }
 }
 
@@ -127,7 +127,7 @@ export const getMe = async(req,res) => {
         }) 
         res.json(result)
     } catch (error) {
-        console.log(error)
+        throw(error)
     }
 
    

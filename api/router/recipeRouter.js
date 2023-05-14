@@ -1,5 +1,5 @@
 import express from 'express'
-import { addRecipeByMe, deleteRecipeByMe, getAllRecipes, getBookmarkAllByMe, getBookmarkById, getBookmarkByMe, getLikeById, getlikeByMe, getRecipeByMe, getRecipesByTittle, getTrendingRecipes, updateBookmark, updateLike } from '../controller/recipeController.js'
+import { addRecipeByMe, deleteRecipeByMe, editRecipeByMe, getAllRecipes, getBookmarkAllByMe, getBookmarkById, getBookmarkByMe, getLikeById, getlikeByMe, getRecipeByMe, getRecipesByTittle, getTrendingRecipes, updateBookmark, updateLike } from '../controller/recipeController.js'
 import { refreshTheToken } from '../controller/tokenController.js'
 import { verifyLike } from '../middleware/verifyLike.js'
 import { verifyToken } from '../middleware/verifyToken.js'
@@ -20,6 +20,7 @@ router.get('/search',getRecipesByTittle)
 // khusus CHEF
 router.get('/recipeme', refreshTheToken, verifyToken, getRecipeByMe)
 router.post('/add/recipeme', refreshTheToken, verifyToken, addRecipeByMe)
+router.patch('/edit/recipeme', refreshTheToken, verifyToken,editRecipeByMe )
 router.delete('/delete/recipeme/:id',refreshTheToken, verifyToken,deleteRecipeByMe)
 // khusus CHEF
 

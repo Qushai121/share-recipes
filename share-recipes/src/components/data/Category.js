@@ -22,7 +22,7 @@ export const CategoryMenu = [
     value: "Vegan",
   },
   {
-    link: "/home/categories/?cate=asia",
+    link: "/home/categories/?cate=asianfood",
     value: "AsianFood",
   },
   {

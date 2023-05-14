@@ -5,7 +5,7 @@ import { Recipe } from "../model/recipeModel.js"
 import { recipeStatefull } from "../model/recipeStatefuModel.js"
 import { User } from "../model/userModel.js"
 import { myBookmarkList } from '../model/bookmarkModel.js'
-
+import chalk from 'chalk';
 
 export const getTrendingRecipes = async (req, res) => {
     try {
@@ -20,8 +20,8 @@ export const getTrendingRecipes = async (req, res) => {
                 //  ['createdAt','DESC'],
                 [recipeStatefull, "like", "DESC"]
             ],
-            // muncul kan hanya 6 like terbesar 
-            limit: 6,
+            // muncul kan hanya 20 like terbesar 
+            limit: 20,
         })
 
         res.json(result)
@@ -72,6 +72,7 @@ export const getAllRecipes = async (req, res) => {
 
 export const getRecipesByTittle = async (req, res) => {
     try {
+        console.log(chalk.red(req.query.tittle))
         const result = await Recipe.findAll({
 
             where: {
@@ -141,7 +142,6 @@ export const updateLike = async (req, res) => {
 }
 
 export const getBookmarkAllByMe = async (req, res) => {
-    // console.log(res.locals.userId)
     try {
         const result = await myBookmarkList.findAll({
             where: {
@@ -271,6 +271,79 @@ export const addRecipeByMe = async (req, res) => {
         } catch (error) {
             console.log(error)
         }
+    } catch (error) {
+        res.json('gagal')
+        console.log(error)
+    }
+}
+export const editRecipeByMe = async (req, res) => {
+    const { id,tittle, thumbnail_main, thumbnail_second, about_food, ingredient, time, step, category } = req.body
+console.log(chalk.blue(id))
+    try {
+        try {
+            const result = await Recipe.findAll({
+                where: {
+                    id:id,
+                    UserId: res.locals.userId
+                },
+                
+            })
+            let thumbnail_mains = ''
+            if(result[0].thumbnail_main == thumbnail_main ){
+                 thumbnail_mains =  thumbnail_main
+            }else{
+                const path = "public/uploads/"
+                fs.unlinkSync(path + result[0].thumbnail_main, (err) => {
+                    if (err) {
+                        res.status(500).send({
+                            message: "Could not delete the file. " + err,
+                        });
+                    }
+    
+                    res.status(200).send({
+                        message: "File is deleted.",
+                    });
+                })
+            }
+            let thumbnail_seconds = ''
+            if(result[0].thumbnail_second == thumbnail_second ){
+                thumbnail_seconds =  thumbnail_second
+            }else{
+                const path = "public/uploads/"
+                fs.unlinkSync(path + result[0].thumbnail_second, (err) => {
+                    if (err) {
+                        res.status(500).send({
+                            message: "Could not delete the file. " + err,
+                        });
+                    }
+    
+                    res.status(200).send({
+                        message: "File is deleted.",
+                    });
+                })
+            }
+
+            try {
+                await Recipe.update({
+                   tittle, thumbnail_mains, thumbnail_seconds, about_food, ingredient, time, step, category,
+               },{
+                   where:{
+                       id:id,
+                       UserId: res.locals.userId
+                   }
+               })
+               
+                res.json('Your Recipe Succefully Created')
+    
+            } catch (error) {
+                console.log(error)
+            }
+        } catch (error) {
+            
+        }
+
+
+       
     } catch (error) {
         res.json('gagal')
         console.log(error)

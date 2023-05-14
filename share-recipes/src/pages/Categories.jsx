@@ -18,11 +18,11 @@ const Categories = () => {
           Categories
         </h1>
       </div>
-      <MenuFilter />
+      <MenuFilter refetch={datas} />
       {loading ? (
         <Loading wrapper={'py-5 pl-5 '} msg={"Please Wait ...."} />
       ) : (
-        <div className="mx-auto w-[90vw]  ">
+        <div className="mx-auto w-[90vw] gap-4 flex flex-col ">
           {datas.map((value, index) => (
             <CardRecipeBlog value={value} />
           ))}

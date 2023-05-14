@@ -15,6 +15,7 @@ import MyRecipes from './pages/protected/MyRecipes';
 import DetailRecipes from './pages/DetailRecipes';
 import AddRecipes from './pages/protected/AddRecipes';
 import MyBookmark from './pages/protected/MyBookmark';
+import EditRecipes from './pages/protected/EditRecipes';
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,9 @@ const router = createBrowserRouter([
       {
         path:'bookmark',
         element:(<MyBookmark/>)
+      },{
+        path:'myrecipes/edit',
+        element:(<EditRecipes/>)
       }
     ]
   },

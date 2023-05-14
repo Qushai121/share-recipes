@@ -76,7 +76,7 @@ const AddRecipes = () => {
 
   const handleKirims = async (e) => {
     e.preventDefault();
-    console.log("aaa");
+    // console.log("aaa");
     try {
       const formData = new FormData();
       formData.append("file", image.thumbnail_second);
@@ -91,7 +91,7 @@ const AddRecipes = () => {
   };
 
   const addRecipe = async (e) => {
-    console.log("halo");
+    // console.log("halo");
     try {
       await axios.post("http://localhost:3002/add/recipeme", file);
       // Navigate("home")
@@ -111,7 +111,7 @@ const AddRecipes = () => {
       >
         <div className="flex justify-between mx-4 py-3">
           <p>Cancel</p>
-          <Bookmark style={"w-6 mx-auto "} fill={"white"} />
+          {/* <Bookmark recipeId={null} style={"w-6 mx-auto "} fill={"white"} /> */}
         </div>
         <div className="flex flex-col items-center">
           <span>Thumbnail Main</span>
@@ -163,14 +163,14 @@ const AddRecipes = () => {
 
       <div className="bg-custom-main relative h-full -mt-3 rounded-t-2xl ">
         <div className="absolute -top-8 right-2  ">
-          <Like
+          {/* <Like
             pStyle={"text-[14px] -mt-1 "}
             style={"w-8"}
             fill={""}
             wrapper={
               "bg-custom-pink border-2 border-stone-300 shadow-xl w-fit py-1 px-3 rounded-full"
             }
-          />
+          /> */}
         </div>
         <form
           onSubmit={addRecipe}

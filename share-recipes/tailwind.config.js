@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens:{
+        'hp':'425px'
+      },
       colors: {
         // ribet pilih warnanya
         'custom-main': '#f9dc5c',

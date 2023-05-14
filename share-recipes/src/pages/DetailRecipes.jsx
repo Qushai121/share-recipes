@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const DetailRecipes = () => {
   const [menu, setMenu] = useState("Ingredient");
   const state = useLocation().state;
+
   const stylea =
     "text-walter-white text-xl duration-300 font-semibold bg-custom-butbrown py-2 px-10 md:px-16 rounded-lg";
   const styleb =

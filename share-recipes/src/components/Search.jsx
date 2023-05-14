@@ -9,14 +9,16 @@ const Search = () => {
   const [container, setContainer] = useState(false);
   const tittleQuery = useLocation().search;
 
+  const { datas, errros, loading, refetch } = useFetch(`/search/?tittle=${tittle}`);
   const searchTittle = (e) => {
     setTittle(e.target.value);
     setContainer(true)
+    refetch()
   };
 
-  const { datas, errros, loading, refetch } = useFetch(
-    `/search/?tittle=${tittle}`
-  );
+  console.log(tittle)
+
+  console.log(datas)
 
   return (
     <div className="flex flex-col ">

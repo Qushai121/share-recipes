@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import MenuFilter from "../components/MenuFilter";
 import axios from "axios";
 import CardTrending from "../components/Card/CardTrending";
-import { CategoryMenu } from "../components/data/Category";
+
 import useFetch from "../hooks/useFetch";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -38,18 +38,22 @@ const Home = () => {
       </div>
 
       <div className="flex mx-8 mt-6 justify-between">
-        <h1 className="font-medium text-lg md:text-[20px] text-custom-dark ">Trending</h1>
-        <Link
+        <h1 className="font-medium text-lg md:text-[20px] text-custom-dark ">
+          Trending
+        </h1>
+        {/* <Link
           className="flex justify-center items-center gap-2 "
           to={"trending"}
         >
           <p className="text-custom-second">See all</p>
           <img className="w-5 " src="/icons/arrow.svg" alt="" />
-        </Link>
+        </Link> */}
       </div>
       <CardTrending />
       <div className="flex mx-8 mt-7 mb-1 justify-between">
-        <h1 className=" md:text-[20px] font-medium text-lg text-custom-dark ">Categories</h1>
+        <h1 className=" md:text-[20px] font-medium text-lg text-custom-dark ">
+          Categories
+        </h1>
         <Link
           className="flex justify-center items-center gap-2 "
           to={"categories"}
@@ -58,8 +62,11 @@ const Home = () => {
           <img className="w-5 " src="/icons/arrow.svg" alt="" />
         </Link>
       </div>
+
       <MenuFilter />
-      <div>
+
+      <br />
+      <div className="mt-4 ">
         {loading ? (
           <Loading wrapper={"my-5 ml-7"} msg={"Getting category..."} />
         ) : (
@@ -123,14 +130,16 @@ const Home = () => {
       </div>
 
       <div className="flex justify-between mx-8 pt-4">
-        <h1 className=" md:text-[24px] font-medium text-lg text-custom-dark">Popular Chef</h1>
-        <Link
+        <h1 className=" md:text-[24px] font-medium text-lg text-custom-dark">
+          Popular Chef
+        </h1>
+        {/* <Link
           className="flex justify-center items-center gap-2 "
           to={"trending"}
         >
           <p className="text-custom-second">See all</p>
           <img className="w-5 " src="/icons/arrow.svg" alt="" />
-        </Link>
+        </Link> */}
       </div>
 
       {/* POPULAR CHEF */}
@@ -144,7 +153,7 @@ const Home = () => {
             768: {
               // width:0,
               slidesPerView: 5,
-              spaceBetween: 50
+              spaceBetween: 50,
             },
             1024: {
               // width:0,

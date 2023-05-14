@@ -19,15 +19,17 @@ const useFetch = (url) => {
       setLoading(false)
     }
     getData()
-  }, [url])
+  }, [])
 
   const refetch = async () => {
+    setLoading(true)
     try {
       const result = await axios.get(url)
       setDatas(result.data)
     } catch (error) {
       setErrors(error)
     }
+    setLoading(false)
   }
 
   return { datas, loading, errors,refetch }

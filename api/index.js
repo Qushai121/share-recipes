@@ -16,8 +16,11 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }))
 
-
+// bikin database dengan nama resepblog
+// lalu nyalain kode db.sync() untuk buat table
 // db.sync()
+// migration 
+
 
 // upload image start
 // https://www.npmjs.com/package/multer

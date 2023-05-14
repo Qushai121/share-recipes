@@ -4,7 +4,7 @@ import Loading from "../Loading";
 import Bookmark from "../Bookmark";
 import Like from "../Like";
 import { Link } from "react-router-dom";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Autoplay, Navigation } from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -20,7 +20,16 @@ const CardTrending = () => {
           // does that actully work ? let find out
           slidesPerView={2}
           spaceBetween={120}
-
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={false}
+          modules={[Autoplay, Navigation]}
+          
           breakpoints={{
             // when window width is >= 640px
 
@@ -39,18 +48,19 @@ const CardTrending = () => {
               slidesPerView: 3,
               spaceBetween: 100,
             },
-            1536:{
+            1536: {
               slidesPerView: 5,
               spaceBetween: 100,
-
-            }
+            },
           }}
         >
           {datas.map((value, index) => {
             return (
               <SwiperSlide key={index}>
-                <div className="h-[30vh] w-[60vw] md:w-[35vw] lg:h-[35vh] 2xl:w-[20vw] 
-                   relative mx-4 my-2 pb-7 rounded-xl shadow-lg ">
+                <div
+                  className="h-[30vh] w-[60vw] md:w-[35vw] lg:h-[35vh] 2xl:w-[20vw] 
+                   relative mx-4 my-2 pb-7 rounded-xl shadow-lg "
+                >
                   <button className="absolute flex flex-col w-10 p-1 top-1 right-2 ">
                     {/* reuseable bookmark */}
                     <Bookmark
@@ -96,7 +106,7 @@ const CardTrending = () => {
                             <p>{value.time}</p>
                           </div>
                         </div>
-                        <div className="absolute right-3" >
+                        <div className="absolute right-3">
                           {value?.User?.avatar ? (
                             <img
                               className="w-16 h-14 object-cover object-center shadow-avatar rounded-full "

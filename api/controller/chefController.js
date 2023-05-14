@@ -17,7 +17,7 @@ export const getChefAll = async (req, res) => {
         })
         response(200,result,"getting your request",res)
     } catch (error) {
-        console.log(error)
+        throw(error)
     }
 }
 
@@ -47,9 +47,9 @@ export const getChefById = async (req, res) => {
           john += result[0].recipes[i].recipeStatefull.like
         }
         
-        // console.log(john)
+        // throw(john)
         res.json([result[0],{totalLike:john}])
     } catch (error) {
-        console.log(error)
+        throw(error)
     }
 }

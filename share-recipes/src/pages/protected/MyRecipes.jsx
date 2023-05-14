@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useFetcher } from "react-router-dom";
+import { Link, Navigate, useFetcher } from "react-router-dom";
 import CardRecipeBlog from "../../components/Card/CardRecipeBlog";
 // import { login } from "../../../../api/controller/authController";
 import useFetch from "../../hooks/useFetch";
@@ -21,13 +21,12 @@ const MyRecipes = () => {
   };
 
   const lihatId = (id) => {
-    console.log(id);
   };
 
   // console.log(datas)
 
   return (
-    <div className="flex flex-col items-center gap-4 justify-center w-full ">
+    <div className="flex flex-col items-center gap-4 justify-center w-full pt-7 ">
       <div className="bg-custom-main h-fit py-2 text-center rounded-lg px-4 mb-4 shadow-nav ">
         <Link to={"/dashboard/add"}>Add New Recipe</Link>
       </div>
@@ -44,15 +43,15 @@ const MyRecipes = () => {
             ) : (
               <>
                 {datas?.result?.map((value, index) => (
-                  <div className="flex gap-2 flex-col">
+                  <div key={index} className="flex gap-2 flex-col">
                     <CardRecipeBlog value={value} />
-                    <div className="flex gap-4">
-                      <button
-                        onClick={() => lihatId(value.id)}
-                        className="bg-green-300 shadow-green-400 cursor-pointer shadow-xl h-fit py-2 text text-center rounded-lg px-6"
+                    <div className="flex gap-4 mx-6 ">
+                    <Link
+                        state={value} to={'edit'}
+                        className="bg-green-300 shadow-green-400 shadow-xl h-fit py-2 text-center rounded-lg px-6"
                       >
-                        <p>Edit</p>
-                      </button>
+                        Edit
+                      </Link>
                       <button
                         onClick={() => deleteRecipeByMe(value.id)}
                         className="bg-red-400 shadow-red-400 shadow-xl h-fit py-2 text-center rounded-lg px-4 "

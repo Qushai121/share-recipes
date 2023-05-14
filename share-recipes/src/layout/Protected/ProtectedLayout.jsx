@@ -23,7 +23,7 @@ if(errors.response?.status===400){
       <Sidebar/>
     </div>
       <div className='absolute w-full bg-walter-white overflow-y-scroll h-[100vh]' >
-      <div className='pt-[4rem] ' >
+      <div className='' >
       <Outlet/>
       </div>
       </div>
